@@ -1,7 +1,7 @@
 # Zit - minimal plugin manager for ZSH
 
 # store all loaded modules to paths
-declare -a ZIT_MODULES_LOADED
+export -a ZIT_MODULES_LOADED
 # set variable below to change zit modules path
 if [[ -z ${ZIT_MODULES_PATH} ]]; then
   export ZIT_MODULES_PATH=${ZDOTDIR:-${HOME}}
