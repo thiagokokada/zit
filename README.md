@@ -60,12 +60,12 @@ everytime, you can simply put in your `~/.zshrc`.
 
 Zit also provide some command alias so you can type slightly less:
 
-| Command          | Alias  |
-| ---------------- | ------ |
-| zit-install      | zit-in |
-| zit-load         | zit-lo |
-| zit-install-load | zit-il |
-| zit-update       | zit-up |
+| Command            | Alias    |
+| ------------------ | -------- |
+| `zit-install`      | `zit-in` |
+| `zit-load`         | `zit-lo` |
+| `zit-install-load` | `zit-il` |
+| `zit-update`       | `zit-up` |
 
 ## Installation
 
@@ -82,3 +82,25 @@ And source the cloned diretory in your `~/.zshrc`
 
     source $HOME/.zit/zit.zsh
 
+In the above case you could even put in your `~/.zshrc` (after above line):
+
+    zit-load ".zit"
+
+So Zit can manage Zit updates too.
+
+## FAQ
+
+### Why zit install everything in home directory by default?
+
+Because some plugins assume that they're running from home. If this isn't a
+problem for you, you can simply set your `ZIT_MODULES_PATH` to something in
+your `~/.zshrc`:
+
+    ZIT_MODULES_PATH="$HOME/.zit.d"
+
+### I want to compile my ZSH plugins to speed up initialization
+
+You can simply call compilation of your installed modules yourself inside your
+`~/.zlogin`. Look at the `zlogin` file from Zim for example:
+<https://github.com/Eriner/zim/blob/master/templates/zlogin>. You can simply
+edit this file to include your `ZIT_MODULES_PATH`, for example.
