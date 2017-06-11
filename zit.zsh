@@ -9,7 +9,7 @@ fi
 
 # https://github.com/m45t3r/zit#branch -> https://github.com/m45t3r/zit
 _zit-get-repo() {
-  printf -v "${1}" "${2%'#'*}"
+  eval "${1}=${2%'#'*}"
 }
 
 # https://github.com/m45t3r/zit -> master
@@ -17,9 +17,9 @@ _zit-get-repo() {
 _zit-get-branch() {
   local branch="${2#*'#'}"
   if [[ "${branch}" = "${2}" ]]; then
-    printf -v "${1}" "master"
+    eval "${1}=master"
   else
-    printf -v "${1}" "${branch}"
+    eval "${1}=${branch}"
   fi
 }
 
