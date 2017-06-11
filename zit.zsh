@@ -24,8 +24,8 @@ zit-install() {
 
   # clone module
   if [[ ! -d "${module_dir}" ]]; then
-    echo "Installing ${module_dir}" && \
-    git clone --recursive "${git_repo}" "${module_dir}" && \
+    echo "Installing ${module_dir}"
+    git clone --recursive "${git_repo}" "${module_dir}"
     echo
   fi
 }
