@@ -3,8 +3,8 @@
 # store all loaded modules to paths
 export -a ZIT_MODULES_LOADED
 # set variable below to change zit modules path
-if [[ -z ${ZIT_MODULES_PATH} ]]; then
-  export ZIT_MODULES_PATH=${ZDOTDIR:-${HOME}}
+if [[ -z "${ZIT_MODULES_PATH}" ]]; then
+  export ZIT_MODULES_PATH="${ZDOTDIR:-${HOME}}"
 fi
 
 # https://github.com/m45t3r/zit#branch -> https://github.com/m45t3r/zit
@@ -35,8 +35,8 @@ zit-load() {
 
 # installer
 zit-install() {
-  local git_repo; _zit-get-repo git_repo ${1}
-  local git_branch; _zit-get-branch git_branch ${1}
+  local git_repo; _zit-get-repo git_repo "${1}"
+  local git_branch; _zit-get-branch git_branch "${1}"
   local module_dir="${ZIT_MODULES_PATH}/${2}"
 
   # clone module
