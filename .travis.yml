@@ -4,5 +4,14 @@ dist: trusty
 addons:
   apt:
     packages:
-      - zsh
+      - build-essential
+before_install:
+- export LOCAL="$(mktemp --directory --tmpdir=${TMPDIR:/tmp} local.bin.XXXXXX)"
+- curl -L http://downloads.sourceforge.net/zsh/zsh-5.3.1.tar.gz | tar zx
+- cd zsh-5.3.1
+- ./configure --prefix=$LOCAL
+- make
+- make install
+- cd -
+- export PATH="$LOCAL/bin:$PATH"
 script: cd tests; zsh --version; zsh ./run_all_tests.zsh
