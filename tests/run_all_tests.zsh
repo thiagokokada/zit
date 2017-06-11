@@ -1,5 +1,7 @@
 #!/bin/zsh
 
+set -e
+
 run_test() {
   echo "Running test: ${1}"
   zsh "./${1}.zsh"

@@ -2,6 +2,8 @@
 
 ## minimal plugin manager for ZSH
 
+[![Build Status](https://travis-ci.org/m45t3r/zit.svg?branch=master)](https://travis-ci.org/m45t3r/zit)
+
 Zit is yet another plugin manager for ZSH. It is minimal because it implements
 the bare minimum to be qualified as a plugin manager: it allows the user to
 install plugins from Git repositories (and Git repositories only, them why
