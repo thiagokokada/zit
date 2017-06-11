@@ -5,10 +5,7 @@ SHUNIT_PARENT=$0
 
 source ../zit.zsh
 
-# For tests in remote repository
-# REPO_URL="https://github.com/m45t3r/zit"
-# Local tests using this own git repository
-REPO_URL="../"
+REPO_URL="https://github.com/m45t3r/zit"
 
 setUp() {
   export LANG=C
