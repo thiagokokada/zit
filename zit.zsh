@@ -9,16 +9,17 @@ fi
 
 # https://github.com/m45t3r/zit#branch -> https://github.com/m45t3r/zit
 _zit-get-repo() {
-  echo "${1%'#'*}"
+  printf -v "${1}" "${2%'#'*}"
 }
 
+# https://github.com/m45t3r/zit -> master
 # https://github.com/m45t3r/zit#branch -> branch
 _zit-get-branch() {
-  local branch="${1#*'#'}"
-  if [[ "${branch}" = "${1}" ]]; then
-    echo "master"
+  local branch="${2#*'#'}"
+  if [[ "${branch}" = "${2}" ]]; then
+    printf -v "${1}" "master"
   else
-    echo "${branch}"
+    printf -v "${1}" "${branch}"
   fi
 }
 
@@ -34,8 +35,8 @@ zit-load() {
 
 # installer
 zit-install() {
-  local git_repo=$(_zit-get-repo ${1})
-  local git_branch=$(_zit-get-branch ${1})
+  local git_repo; _zit-get-repo git_repo ${1}
+  local git_branch; _zit-get-branch git_branch ${1}
   local module_dir="${ZIT_MODULES_PATH}/${2}"
 
   # clone module
