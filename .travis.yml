@@ -1,6 +1,7 @@
 language: sh
+sudo: false
 addons:
-    apt:
-        packages:
-            - zsh
-script: cd tests; zsh run_all_tests.zsh
+  apt:
+    packages:
+      - zsh
+script: cd tests; zsh ./run_all_tests.zsh
