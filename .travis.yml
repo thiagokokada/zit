@@ -6,11 +6,16 @@ addons:
     packages:
       - build-essential
 env:
+  - USING_ZSH_VERSION="zsh-5.1.1"
+  - USING_ZSH_VERSION="zsh-5.2"
   - USING_ZSH_VERSION="zsh-5.3.1"
-cache:
-  directories:
-    - ${HOME}/zsh
 before_install:
-  - bash .travis_build_zsh.sh
+  - cd "${HOME}"
+  - curl -L "http://downloads.sourceforge.net/zsh/${USING_ZSH_VERSION}.tar.gz" | tar zx
+  - cd "${USING_ZSH_VERSION}"
+  - ./configure --prefix="${HOME}/zsh"
+  - make -j2
+  - make install
   - export PATH="${HOME}/zsh/bin:${PATH}"
+  - cd "${TRAVIS_BUILD_DIR}"
 script: cd tests; zsh --version; zsh ./run_all_tests.zsh
