@@ -5,4 +5,4 @@ addons:
   apt:
     packages:
       - zsh
-script: cd tests; zsh ./run_all_tests.zsh
+script: cd tests; zsh --version; zsh ./run_all_tests.zsh
