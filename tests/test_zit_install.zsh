@@ -5,7 +5,10 @@ SHUNIT_PARENT=$0
 
 source ../zit.zsh
 
+# For tests in remote repository
 REPO_URL="https://github.com/m45t3r/zit"
+# Local tests using this own git repository
+# REPO_URL="../"
 
 setUp() {
   export LANG=C
@@ -21,27 +24,15 @@ tearDown() {
 test_install_without_branch() {
   zit-install "${REPO_URL}" "zit" &> /dev/null
   cd "${ZIT_MODULES_PATH}/zit"
-  local result=$(git status)
-  local expect=$(cat <<EOF
-On branch master
-Your branch is up-to-date with 'origin/master'.
-nothing to commit, working tree clean
-EOF
-  )
-  assertEquals "${expect}" "${result}"
+  git branch | grep "* master" &> /dev/null
+  assertTrue "${?}"
 }
 
 test_install_with_branch() {
   zit-install "${REPO_URL}#tests" "zit" &> /dev/null
   cd "${ZIT_MODULES_PATH}/zit"
-  local result=$(git status)
-  local expect=$(cat <<EOF
-On branch tests
-Your branch is up-to-date with 'origin/tests'.
-nothing to commit, working tree clean
-EOF
-  )
-  assertEquals "${expect}" "${result}"
+  git branch | grep "* tests" &> /dev/null
+  assertTrue "${?}"
 }
 
 test_install_multiple_times() {

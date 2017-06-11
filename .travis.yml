@@ -13,5 +13,6 @@ before_install:
 - make -j2
 - make install
 - cd -
+- rm -rf zsh-5.3.1
 - export PATH="$LOCAL/bin:$PATH"
 script: cd tests; zsh --version; zsh ./run_all_tests.zsh
