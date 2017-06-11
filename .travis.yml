@@ -5,14 +5,15 @@ addons:
   apt:
     packages:
       - build-essential
+env: USING_ZSH="zsh-5.3.1"
 before_install:
 - export LOCAL="$(mktemp --directory --tmpdir=${TMPDIR:/tmp} local.bin.XXXXXX)"
-- curl -L http://downloads.sourceforge.net/zsh/zsh-5.3.1.tar.gz | tar zx
-- cd zsh-5.3.1
+- curl -L http://downloads.sourceforge.net/zsh/${USING_ZSH}.tar.gz | tar zx
+- pushd ${USING_ZSH}
 - ./configure --prefix=$LOCAL
 - make -j2
 - make install
-- cd -
-- rm -rf zsh-5.3.1
+- popd
+- rm -rf ${USING_ZSH}
 - export PATH="$LOCAL/bin:$PATH"
 script: cd tests; zsh --version; zsh ./run_all_tests.zsh
