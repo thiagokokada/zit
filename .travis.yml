@@ -5,15 +5,12 @@ addons:
   apt:
     packages:
       - build-essential
-env: USING_ZSH="zsh-5.3.1"
+env:
+  - USING_ZSH_VERSION="zsh-5.3.1"
+cache:
+  directories:
+    - ${HOME}/zsh
 before_install:
-- export LOCAL="$(mktemp --directory --tmpdir=${TMPDIR:/tmp} local.bin.XXXXXX)"
-- curl -L http://downloads.sourceforge.net/zsh/${USING_ZSH}.tar.gz | tar zx
-- pushd ${USING_ZSH}
-- ./configure --prefix=$LOCAL
-- make -j2
-- make install
-- popd
-- rm -rf ${USING_ZSH}
-- export PATH="$LOCAL/bin:$PATH"
+  - bash .travis_build_zsh.sh
+  - export PATH="${HOME}/zsh/bin:${PATH}"
 script: cd tests; zsh --version; zsh ./run_all_tests.zsh
