@@ -59,7 +59,7 @@ zit-install-load() {
 
 # updater
 zit-update() {
-  for module_dir in ${ZIT_MODULES_LOADED}; do
+  for module_dir in "${ZIT_MODULES_LOADED[@]}"; do
     pushd "${module_dir}"
     echo "Updating ${module_dir}"
     git pull --rebase
