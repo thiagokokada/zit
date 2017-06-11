@@ -1,0 +1,6 @@
+language: sh
+addons:
+    apt:
+        packages:
+            - zsh
+script: cd tests; zsh run_all_tests.zsh
