@@ -25,6 +25,15 @@ The command above will clone [Eriner/zim](https://github.com/Eriner/zim) inside
 of your `ZDOTDIR` variable or your home directory). However, if
 `ZIT_MODULES_PATH/.zim` already exists, it will do nothing.
 
+Zit also supports Git branches. To do so, pass the branch using `#branch` after
+the repository url during `zit-install` call:
+
+    $ zit-install https://github.com/zsh-users/zsh-autosuggestions#develop
+
+**Important note:** Zit does not support changing branches after install. If
+you want to change a branch of an already installed branch, go to the directory
+of the installed plugin and call `git checkout branch-name` manually!
+
 After install, you can load ZIM by running:
 
     $ zit-load ".zim" "init.zsh"
