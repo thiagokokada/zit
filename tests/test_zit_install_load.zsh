@@ -7,8 +7,8 @@ source ../zit.zsh
 
 setUp() {
   # mocking real zit functions
-  zit-install() { echo "zit-install" "${1}" "${2}" }
-  zit-load() { echo "zit-load" "${1}" "${2}" }
+  zit-install() { echo "zit-install" "${@}" }
+  zit-load() { echo "zit-load" "${@}" }
 }
 
 test_repo_directory() {

@@ -5,38 +5,34 @@ SHUNIT_PARENT=$0
 
 source ../zit.zsh
 
-# For tests in remote repository
-REPO_URL="https://github.com/m45t3r/zit"
-# Local tests using this own git repository
-# REPO_URL="../"
-
 setUp() {
-  export LANG=C
-  ZIT_MODULES_PATH="tmp"
-  INITIAL_DIRECTORY="${PWD}"
+  REPO_URL="https://github.com/m45t3r/zit"
+  ZIT_MODULES_PATH=$(mktemp -d)
+  # mock git
+  git() { echo "git ${@}"; mkdir -p "${ZIT_MODULES_PATH}/zit" }
 }
 
 tearDown() {
-  cd "${INITIAL_DIRECTORY}"
-  rm -rf "tmp"
+  rm -rf "${ZIT_MODULES_PATH}"
 }
 
 test_install_without_branch() {
-  local result=$(zit-install "${REPO_URL}" "zit" 2>&1)
-  echo "${result}" | grep "Installing tmp/zit" &> /dev/null
-  assertTrue "${?}"
-  cd "${ZIT_MODULES_PATH}/zit"
-  git branch | grep "* master" &> /dev/null
-  assertTrue "${?}"
+  local result=$(zit-install "${REPO_URL}" "zit")
+  local expect=$(cat <<EOF
+Installing ${ZIT_MODULES_PATH}/zit
+git clone --recursive ${REPO_URL} -b master ${ZIT_MODULES_PATH}/zit
+EOF
+  )
+  assertEquals "${expect}" "${result}"
 }
 
 test_install_with_branch() {
-  local result=$(zit-install "${REPO_URL}#tests" "zit" 2>&1)
-  echo "${result}" | grep "Installing tmp/zit" &> /dev/null
-  assertTrue "${?}"
-  cd "${ZIT_MODULES_PATH}/zit"
-  git branch | grep "* tests" &> /dev/null
-  assertTrue "${?}"
+  local result=$(zit-install "${REPO_URL}#branch_name" "zit")
+  local expect=$(cat <<EOF
+Installing ${ZIT_MODULES_PATH}/zit
+git clone --recursive ${REPO_URL} -b branch_name ${ZIT_MODULES_PATH}/zit
+EOF
+  )
 }
 
 test_install_multiple_times() {

@@ -5,28 +5,30 @@ SHUNIT_PARENT=$0
 
 source ../zit.zsh
 
-# For tests in remote repository
-REPO_URL="https://github.com/m45t3r/zit"
-# Local tests using this own git repository
-# REPO_URL="../"
-
 setUp() {
-  export LANG=C
-  ZIT_MODULES_PATH="tmp"
-  INITIAL_DIRECTORY="${PWD}"
-  zit-install-load "${REPO_URL}" "zit" &> /dev/null
+  ZIT_MODULES_PATH=$(mktemp -d)
+  # mock git
+  git() { pwd; echo "git ${@}" }
+  mkdir -p "${ZIT_MODULES_PATH}/a"
+  mkdir -p "${ZIT_MODULES_PATH}/b"
 }
 
 tearDown() {
-  cd "${INITIAL_DIRECTORY}"
-  rm -rf "tmp"
+  rm -rf "${ZIT_MODULES_PATH}"
 }
 
 test_update() {
+  zit-install-load "https://github.com/a/a" "a" &> /dev/null
+  zit-install-load "https://github.com/b/b" "b" &> /dev/null
   local result=$(zit-update)
   local expect=$(cat << EOF
-Updating tmp/zit
-Already up-to-date.
+Updating ${ZIT_MODULES_PATH}/a
+${ZIT_MODULES_PATH}/a
+git pull --rebase
+
+Updating ${ZIT_MODULES_PATH}/b
+${ZIT_MODULES_PATH}/b
+git pull --rebase
 EOF
   )
   assertEquals "${expect}" "${result}"
