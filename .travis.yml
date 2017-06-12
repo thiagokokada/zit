@@ -6,9 +6,13 @@ addons:
     packages:
       - build-essential
 env:
+  - USING_ZSH_VERSION="zsh-5.0.8"
   - USING_ZSH_VERSION="zsh-5.1.1"
   - USING_ZSH_VERSION="zsh-5.2"
   - USING_ZSH_VERSION="zsh-5.3.1"
+matrix:
+  allow_failures:
+    - env: USING_ZSH_VERSION="zsh-5.0.8"
 before_install:
   - cd "${HOME}"
   - curl -L "http://downloads.sourceforge.net/zsh/${USING_ZSH_VERSION}.tar.gz" | tar zx
