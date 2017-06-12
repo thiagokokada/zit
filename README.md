@@ -9,7 +9,7 @@ the bare minimum to be qualified as a plugin manager: it allows the user to
 install plugins from Git repositories (and Git repositories only, them why
 the name), source plugins and update them. It does not implement fancy
 functions like cleanup of removed plugins, automatic compilation of installed
-plugins, alias for Oh-My-Zsh/prezto/other ZSH frameworks, building binaries,
+plugins, alias for oh-my-zsh/prezto/other ZSH frameworks, building binaries,
 PATH manipulation and others.
 
 It should be as simple as it can be, minimal enough that if you want you can
@@ -99,6 +99,18 @@ In the above case you could even put in your `~/.zshrc` (after above line):
 
 So Zit can manage Zit updates too.
 
+## Supported versions
+
+Zit supports ZSH version `5.1` and above. There are automated tests running in
+the following versions of ZSH in [Travis-CI](travis-ci.org/m45t3r/zit):
+
+- `5.1.1`
+- `5.2`
+- `5.3.1`
+
+The tests are known to break in versions `<5.1`, however fixes are welcome if
+you happen to use an older version of ZSH.
+
 ## FAQ
 
 ### Why zit install everything in home directory by default?
@@ -109,7 +121,7 @@ your `~/.zshrc`:
 
     ZIT_MODULES_PATH="$HOME/.zit.d"
 
-### I want to compile my ZSH plugins to speed up initialization
+### How can I compile my ZSH plugins to speed up initialization?
 
 You can simply call compilation of your installed modules yourself inside your
 `~/.zlogin`. Look at the `zlogin` file from Zim for example:
