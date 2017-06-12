@@ -14,3 +14,4 @@ run_test test_zit_get_repo
 run_test test_zit_install
 run_test test_zit_install_load
 run_test test_zit_load
+run_test test_zit_update

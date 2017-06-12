@@ -13,23 +13,27 @@ REPO_URL="https://github.com/m45t3r/zit"
 setUp() {
   export LANG=C
   ZIT_MODULES_PATH="tmp"
-  INITIAL_DIRECTORY=${PWD}
+  INITIAL_DIRECTORY="${PWD}"
 }
 
 tearDown() {
-  cd "$INITIAL_DIRECTORY"
+  cd "${INITIAL_DIRECTORY}"
   rm -rf "tmp"
 }
 
 test_install_without_branch() {
-  zit-install "${REPO_URL}" "zit" &> /dev/null
+  local result=$(zit-install "${REPO_URL}" "zit" 2>&1)
+  echo "${result}" | grep "Installing tmp/zit" &> /dev/null
+  assertTrue "${?}"
   cd "${ZIT_MODULES_PATH}/zit"
   git branch | grep "* master" &> /dev/null
   assertTrue "${?}"
 }
 
 test_install_with_branch() {
-  zit-install "${REPO_URL}#tests" "zit" &> /dev/null
+  local result=$(zit-install "${REPO_URL}#tests" "zit" 2>&1)
+  echo "${result}" | grep "Installing tmp/zit" &> /dev/null
+  assertTrue "${?}"
   cd "${ZIT_MODULES_PATH}/zit"
   git branch | grep "* tests" &> /dev/null
   assertTrue "${?}"
