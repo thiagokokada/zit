@@ -1,6 +1,6 @@
 #!/bin/zsh
 
-set -e
+set -eu
 
 run_test() {
   echo "Running test: ${1}"

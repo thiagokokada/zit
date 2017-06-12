@@ -17,7 +17,12 @@ tearDown() {
   rm -rf "${ZIT_MODULES_PATH}"
 }
 
-test_update() {
+test_update_without_repos() {
+  local result=$(zit-update)
+  assertNull "${result}"
+}
+
+test_update_with_repos() {
   zit-install-load "https://github.com/a/a" "a" &> /dev/null
   zit-install-load "https://github.com/b/b" "b" &> /dev/null
   local result=$(zit-update)
