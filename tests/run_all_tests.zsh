@@ -15,3 +15,4 @@ run_test test_zit_install
 run_test test_zit_install_load
 run_test test_zit_load
 run_test test_zit_update
+run_test test_zit_integration

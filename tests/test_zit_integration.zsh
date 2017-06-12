@@ -16,7 +16,7 @@ oneTimeTearDown() {
 test_zit_in_zit_lo_with_dotzsh() {
   zit-in "https://github.com/junegunn/fzf" "fzf"
   assertTrue "${?}"
-  zit-lo "fzf" "fzf/shell/*.zsh"
+  zit-lo "fzf" "shell/*.zsh"
   assertTrue "${?}"
 }
 
