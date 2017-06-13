@@ -26,7 +26,7 @@ test_loading_module_with_glob_in_dot_zsh_param() {
 
 test_missing_param_module_dir() {
   local result=$(zit-load)
-  assertEquals "Missing argument: Module directory" "${result}"
+  assertEquals "[zit] Missing argument: Module directory" "${result}"
 }
 
 source ./shunit2/src/shunit2

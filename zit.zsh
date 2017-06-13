@@ -27,7 +27,7 @@ _zit-param-validation() {
   local name="${1}"
   local param="${2}"
   if [[ -z "${param}" ]]; then
-    printf "Missing argument: %s\n" "${name}"
+    printf "[zit] Missing argument: %s\n" "${name}"
     return 1
   fi
   return 0
