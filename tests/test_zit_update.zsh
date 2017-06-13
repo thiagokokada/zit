@@ -23,8 +23,8 @@ test_update_without_repos() {
 }
 
 test_update_with_repos() {
-  zit-install-load "https://github.com/a/a" "a" &> /dev/null
-  zit-install-load "https://github.com/b/b" "b" &> /dev/null
+  zit-install-load "https://github.com/a/a" "a" "a.zsh" &> /dev/null
+  zit-install-load "https://github.com/b/b" "b" "b.zsh" &> /dev/null
   local result=$(zit-update)
   local expect=$(cat << EOF
 Updating ${ZIT_MODULES_PATH}/a

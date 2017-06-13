@@ -13,28 +13,44 @@ oneTimeTearDown() {
   rm -rf "${ZIT_MODULES_PATH}"
 }
 
-test_zit_in_zit_lo_with_dotzsh() {
+test_zit_in_zit_lo() {
   zit-in "https://github.com/junegunn/fzf" "fzf"
   assertTrue "${?}"
-  zit-lo "fzf" "shell/*.zsh"
+  zit-lo "fzf" "shell/completion.zsh"
+  assertTrue "${?}"
+  zit-lo "fzf" "shell/key-bindings.zsh"
   assertTrue "${?}"
 }
 
-test_zit_in_zit_lo_without_dotzsh() {
-  zit-in "https://github.com/sorin-ionescu/prezto" "prezto"
+test_zit_in_zit_lo_with_branch() {
+  zit-in "https://github.com/Eriner/zim#master" "zim"
   assertTrue "${?}"
-  zit-lo "prezto"
+  zit-lo "zim" "modules/directory/init.zsh"
+  assertTrue "${?}"
+  zit-lo "zim" "modules/environment/init.zsh"
+  assertTrue "${?}"
+  zit-lo "zim" "modules/git/init.zsh"
+  assertTrue "${?}"
+  zit-lo "zim" "modules/git-info/init.zsh"
+  assertTrue "${?}"
+  zit-lo "zim" "modules/history/init.zsh"
+  assertTrue "${?}"
+  zit-lo "zim" "modules/utility/init.zsh"
+  assertTrue "${?}"
+  zit-lo "zim" "modules/ssh/init.zsh"
+  assertTrue "${?}"
+  zit-lo "zim" "modules/syntax-highlighting/init.zsh"
+  assertTrue "${?}"
+  zit-lo "zim" "modules/history-substring-search/init.zsh"
+  assertTrue "${?}"
+  zit-lo "zim" "modules/prompt/init.zsh"
+  assertTrue "${?}"
+  zit-lo "zim" "modules/completion/init.zsh"
   assertTrue "${?}"
 }
 
-test_zit_il_without_dotzsh() {
-  zit-il "https://github.com/Eriner/zim" "zim"
-  assertTrue "${?}"
-}
-
-test_zit_il_with_dotzsh() {
-  zit-il "https://github.com/zsh-users/zsh-syntax-highlighting" \
-    "zsh-syntax-highlighting" "zsh-syntax-highlighting.zsh"
+test_zit_il() {
+  zit-il "https://github.com/sorin-ionescu/prezto#stashes" "prezto" "init.zsh"
   assertTrue "${?}"
 }
 

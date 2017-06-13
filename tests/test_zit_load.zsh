@@ -9,24 +9,24 @@ setUp() {
   ZIT_MODULES_PATH="mocks"
 }
 
-test_loading_module_with_dot_zsh_param() {
+test_loading_module() {
   local result=$(zit-load "module" "dummy.zsh")
   assertEquals "Hello World!" "${result}"
 }
 
-test_loading_module_without_dot_zsh_param() {
-  local result=$(zit-load "module")
-  assertEquals "Hello World!" "${result}"
-}
-
-test_loading_module_with_glob_in_dot_zsh_param() {
-  local result=$(zit-load "module" "*")
-  assertEquals "Hello World!" "${result}"
+test_loading_module_with_space() {
+  local result=$(zit-load "another module" "dummy.zsh")
+  assertEquals "Another Hello World!" "${result}"
 }
 
 test_missing_param_module_dir() {
   local result=$(zit-load)
   assertEquals "[zit] Missing argument: Module directory" "${result}"
+}
+
+test_missing_param_dot_zsh() {
+  local result=$(zit-load "module")
+  assertEquals "[zit] Missing argument: .zsh file" "${result}"
 }
 
 source ./shunit2/src/shunit2

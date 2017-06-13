@@ -14,7 +14,7 @@ printf "ZSH VERSION=%s\n\n" "${ZSH_VERSION}"
 
 echo "Running ShellCheck"
 shellcheck --version
-shellcheck -s bash "../zit.zsh"
+shellcheck -s bash -e SC1090 "../zit.zsh"
 echo
 
 run_test test_zit_aliases

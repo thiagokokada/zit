@@ -36,12 +36,13 @@ _zit-param-validation() {
 # loader
 zit-load() {
   _zit-param-validation "Module directory" "${1}" || return 1
+  _zit-param-validation ".zsh file" "${2}" || return 1
 
   local module_dir="${ZIT_MODULES_PATH}/${1}"
-  local dot_zsh="${2:-*.zsh}"
+  local dot_zsh="${2}"
 
   # load module in zsh
-  eval source "${module_dir}/${dot_zsh}"
+  source "${module_dir}/${dot_zsh}"
   # added to global dir array for updater
   ZIT_MODULES_LOADED+=("${module_dir}")
 }
@@ -67,10 +68,11 @@ zit-install() {
 zit-install-load() {
   _zit-param-validation "Git repo" "${1}" || return 1
   _zit-param-validation "Module directory" "${2}" || return 1
+  _zit-param-validation ".zsh file" "${3}" || return 1
 
   local git_repo="${1}"
   local module_dir="${2}"
-  local dot_zsh="${3:-*.zsh}"
+  local dot_zsh="${3}"
 
   zit-install "${git_repo}" "${module_dir}"
   zit-load "${module_dir}" "${dot_zsh}"
