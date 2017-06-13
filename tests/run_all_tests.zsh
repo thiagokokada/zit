@@ -12,6 +12,7 @@ run_test() {
 
 printf "ZSH VERSION=%s\n\n" "${ZSH_VERSION}"
 
+shellcheck -s bash "../zit.zsh"
 run_test test_zit_aliases
 run_test test_zit_get_branch
 run_test test_zit_get_repo
