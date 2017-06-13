@@ -22,4 +22,4 @@ before_install:
   - make install
   - export PATH="${HOME}/zsh/bin:${PATH}"
   - cd "${TRAVIS_BUILD_DIR}"
-script: cd tests; zsh --version; zsh ./run_all_tests.zsh
+script: cd tests; zsh ./run_all_tests.zsh
