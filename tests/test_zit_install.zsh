@@ -19,7 +19,6 @@ tearDown() {
 test_install_without_branch() {
   local result=$(zit-install "${REPO_URL}" "zit")
   local expect=$(cat <<EOF
-
 Installing ${ZIT_MODULES_PATH}/zit
 git clone --recursive ${REPO_URL} -b master ${ZIT_MODULES_PATH}/zit
 EOF
@@ -30,7 +29,6 @@ EOF
 test_install_with_branch() {
   local result=$(zit-install "${REPO_URL}#branch_name" "zit")
   local expect=$(cat <<EOF
-
 Installing ${ZIT_MODULES_PATH}/zit
 git clone --recursive ${REPO_URL} -b branch_name ${ZIT_MODULES_PATH}/zit
 EOF
