@@ -33,6 +33,7 @@ Installing ${ZIT_MODULES_PATH}/zit
 git clone --recursive ${REPO_URL} -b branch_name ${ZIT_MODULES_PATH}/zit
 EOF
   )
+  assertEquals "${expect}" "${result}"
 }
 
 test_install_multiple_times() {
