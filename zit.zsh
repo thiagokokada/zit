@@ -60,11 +60,11 @@ zit-install-load() {
 # updater
 zit-update() {
   for module_dir in "${ZIT_MODULES_LOADED[@]}"; do
-    pushd "${module_dir}" &> /dev/null || continue
+    pushd "${module_dir}" > /dev/null || continue
     printf "Updating %s\n" "${module_dir}"
     command git pull
     printf "\n"
-    popd &> /dev/null || continue
+    popd > /dev/null || continue
   done
 }
 
