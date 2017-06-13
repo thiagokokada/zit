@@ -27,35 +27,23 @@ The command above will clone [Eriner/zim](https://github.com/Eriner/zim) inside
 of your `ZDOTDIR` variable or your home directory). However, if
 `ZIT_MODULES_PATH/.zim` already exists, it will do nothing.
 
+After install, you can load ZIM by running:
+
+    $ zit-load ".zim" "init.zsh"
+
+
 Zit also supports Git branches. To do so, pass the branch using `#branch` after
 the repository url during `zit-install` call:
 
-    $ zit-install https://github.com/zsh-users/zsh-autosuggestions#develop
+    $ zit-install "https://github.com/zsh-users/zsh-autosuggestions#develop" ".zsh-autosuggestions"
 
 **Important note:** Zit does not support changing branches after install. If
 you want to change a branch of an already installed branch, go to the directory
 of the installed plugin and call `git checkout branch-name` manually!
 
-After install, you can load ZIM by running:
-
-    $ zit-load ".zim" "init.zsh"
-
-With this command, Zit will source the file named `init.zsh` inside
-`ZIT_MODULES_PATH/.zim`. The second paramter supports glob patterns:
-
-    $ zit-load ".zim" "*.zsh"
-
-In this case, it would try to load all files with extension `.zsh` inside
-`ZIT_MODULES_PATH/.zim` directory. Actually, the above is the default, so you
-could also pass simply:
-
-    $ zit-load ".zim"
-
 You can also call both `zit-install` and `zit-load` in one step:
 
     $ zit-install-load "https://github.com/Eriner/zim/" ".zim" "init.zsh"
-    # Or
-    $ zit-install-load "https://github.com/Eriner/zim/" ".zim"
 
 Finally, Zit can also update all your installed plugins. For this one you
 simply need to run:
@@ -95,7 +83,7 @@ And source the cloned diretory in your `~/.zshrc`
 
 In the above case you could even put in your `~/.zshrc` (after above line):
 
-    zit-load ".zit"
+    zit-load ".zit" "zit.zsh"
 
 So Zit can manage Zit updates too.
 
@@ -114,6 +102,11 @@ you happen to use an older version of ZSH.
 For Git, version `1.7` and above should work. Probably even older versions
 should still work, since Zit does not use any advanced Git features. In
 Travis-CI we are running Git `1.9.x` and it is working great.
+
+## Examples
+
+You can see examples of Zit utilization in 
+[my dotfiles](https://github.com/m45t3r/dotfiles/tree/master/zsh).
 
 ## FAQ
 
