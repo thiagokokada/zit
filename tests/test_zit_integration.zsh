@@ -33,7 +33,13 @@ test_zit_il_without_dotzsh() {
 }
 
 test_zit_il_with_dotzsh() {
-  zit-il "https://github.com/zsh-users/zsh-autosuggestions" \
+  zit-il "https://github.com/zsh-users/zsh-syntax-highlighting" \
+    "zsh-syntax-highlighting" "zsh-syntax-highlighting.zsh"
+  assertTrue "${?}"
+}
+
+test_zit_il_with_branch() {
+  zit-il "https://github.com/zsh-users/zsh-autosuggestions#develop" \
     "zsh-autosuggestions" "zsh-autosuggestions.zsh"
   assertTrue "${?}"
 }
