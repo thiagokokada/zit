@@ -23,10 +23,23 @@ _zit-get-branch() {
   fi
 }
 
+_zit-param-validation() {
+  local name="${1}"
+  local param="${2}"
+  if [[ -z "${param}" ]]; then
+    printf "Missing argument: %s\n" "${name}"
+    return 1
+  fi
+  return 0
+}
+
 # loader
 zit-load() {
+  _zit-param-validation "Module directory" "${1}" || return 1
+
   local module_dir="${ZIT_MODULES_PATH}/${1}"
   local dot_zsh="${2:-*.zsh}"
+
   # load module in zsh
   eval source "${module_dir}/${dot_zsh}"
   # added to global dir array for updater
@@ -35,6 +48,9 @@ zit-load() {
 
 # installer
 zit-install() {
+  _zit-param-validation "Git repo" "${1}" || return 1
+  _zit-param-validation "Module directory" "${2}" || return 1
+
   local git_repo; _zit-get-repo git_repo "${1}"
   local git_branch; _zit-get-branch git_branch "${1}"
   local module_dir="${ZIT_MODULES_PATH}/${2}"
@@ -49,6 +65,9 @@ zit-install() {
 
 # do both above in one step
 zit-install-load() {
+  _zit-param-validation "Git repo" "${1}" || return 1
+  _zit-param-validation "Module directory" "${2}" || return 1
+
   local git_repo="${1}"
   local module_dir="${2}"
   local dot_zsh="${3:-*.zsh}"

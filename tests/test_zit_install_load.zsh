@@ -31,4 +31,14 @@ EOF
   assertEquals "${expect}" "${result}"
 }
 
+test_missing_param_git_repo() {
+  local result=$(zit-install-load)
+  assertEquals "Missing argument: Git repo" "${result}"
+}
+
+test_missing_param_module_dir() {
+  local result=$(zit-install-load "https://github.com/m45t3r/zit")
+  assertEquals "Missing argument: Module directory" "${result}"
+}
+
 source ./shunit2/src/shunit2
