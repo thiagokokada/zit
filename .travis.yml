@@ -4,7 +4,7 @@ dist: trusty
 addons:
   apt:
     sources:
-      - debian-sid
+      - sourceline: 'deb http://archive.ubuntu.com/ubuntu trusty-backports main restricted universe multiverse'
     packages:
       - shellcheck
 env:
