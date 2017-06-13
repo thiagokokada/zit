@@ -29,11 +29,11 @@ test_update_with_repos() {
   local expect=$(cat << EOF
 Updating ${ZIT_MODULES_PATH}/a
 ${ZIT_MODULES_PATH}/a
-git pull --rebase
+git pull
 
 Updating ${ZIT_MODULES_PATH}/b
 ${ZIT_MODULES_PATH}/b
-git pull --rebase
+git pull
 EOF
   )
   assertEquals "${expect}" "${result}"

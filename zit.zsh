@@ -62,7 +62,7 @@ zit-update() {
   for module_dir in "${ZIT_MODULES_LOADED[@]}"; do
     pushd "${module_dir}"
     printf "Updating %s\n" "${module_dir}"
-    \git pull --rebase
+    \git pull
     printf "\n"
     popd
   done
