@@ -41,10 +41,8 @@ zit-load() {
   local module_dir="${ZIT_MODULES_PATH}/${1}"
   local dot_zsh="${2}"
 
-  # load module in zsh
+  # shellcheck source=/dev/null
   source "${module_dir}/${dot_zsh}"
-  # added to global dir array for updater
-  ZIT_MODULES_LOADED+=("${module_dir}")
 }
 
 # installer
@@ -61,6 +59,8 @@ zit-install() {
     printf "Installing %s\n" "${module_dir}"
     command git clone --recursive "${git_repo}" -b "${git_branch}" "${module_dir}"
     printf "\n"
+    # added to global dir array for updater
+    ZIT_MODULES_LOADED+=("${module_dir}")
   fi
 }
 
@@ -80,7 +80,8 @@ zit-install-load() {
 
 # updater
 zit-update() {
-  for module_dir in "${ZIT_MODULES_LOADED[@]}"; do
+  # shellcheck disable=SC2154
+  for module_dir in "${(u)ZIT_MODULES_LOADED[@]}"; do
     pushd "${module_dir}" > /dev/null || continue
     printf "Updating %s\n" "${module_dir}"
     command git pull
