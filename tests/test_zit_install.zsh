@@ -9,7 +9,7 @@ setUp() {
   REPO_URL="https://github.com/m45t3r/zit"
   ZIT_MODULES_PATH=$(mktemp -d)
   # mock git
-  git() { echo "git ${@}"; mkdir -p "${ZIT_MODULES_PATH}/zit" }
+  export PATH="${PWD}/mocks/bin:${PATH}"
 }
 
 tearDown() {
@@ -36,7 +36,7 @@ EOF
 }
 
 test_install_multiple_times() {
-  zit-install "${REPO_URL}" "zit" &> /dev/null
+  mkdir -p "${ZIT_MODULES_PATH}/zit" # simulate another zit-in call
   local result=$(zit-install "${REPO_URL}" "zit")
   assertNull "${result}"
 }

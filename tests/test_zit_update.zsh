@@ -8,7 +8,7 @@ source ../zit.zsh
 setUp() {
   ZIT_MODULES_PATH=$(mktemp -d)
   # mock git
-  git() { pwd; echo "git ${@}" }
+  export PATH="${PWD}/mocks/bin:${PATH}"
   mkdir -p "${ZIT_MODULES_PATH}/a"
   mkdir -p "${ZIT_MODULES_PATH}/b"
 }
@@ -28,11 +28,9 @@ test_update_with_repos() {
   local result=$(zit-update)
   local expect=$(cat << EOF
 Updating ${ZIT_MODULES_PATH}/a
-${ZIT_MODULES_PATH}/a
 git pull
 
 Updating ${ZIT_MODULES_PATH}/b
-${ZIT_MODULES_PATH}/b
 git pull
 EOF
   )
