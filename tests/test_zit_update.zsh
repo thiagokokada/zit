@@ -27,6 +27,7 @@ test_update_with_repos() {
   zit-install-load "https://github.com/b/b" "b" &> /dev/null
   local result=$(zit-update)
   local expect=$(cat << EOF
+
 Updating ${ZIT_MODULES_PATH}/a
 git pull
 
