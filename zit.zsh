@@ -1,7 +1,7 @@
 # Zit - minimal plugin manager for ZSH
 
 # store all loaded modules to paths
-export -a ZIT_MODULES_LOADED
+export -Ua ZIT_MODULES_LOADED
 # set variable below to change zit modules path
 if [[ -z "${ZIT_MODULES_PATH}" ]]; then
   export ZIT_MODULES_PATH="${ZDOTDIR:-${HOME}}"
@@ -80,8 +80,7 @@ zit-install-load() {
 
 # updater
 zit-update() {
-  # shellcheck disable=SC2154
-  for module_dir in "${(u)ZIT_MODULES_LOADED[@]}"; do
+  for module_dir in "${ZIT_MODULES_LOADED[@]}"; do
     pushd "${module_dir}" > /dev/null || continue
     printf "Updating %s\n" "${module_dir}"
     command git pull
