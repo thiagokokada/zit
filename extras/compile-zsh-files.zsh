@@ -1,7 +1,13 @@
 # Compile ZSH completion cache, ZSH config files and loaded Zit modules in
 # background, so it shouldn't affect ZSH interactive load.
+#
 # This serves most as an example on how to do it, and probably needs some
 # adaptation depending on your needs.
+#
+# WARNING:
+# You should source this script at the end of your ~/.zshrc, or
+# ZIT_MODULES_LOADED will not include all your Zit plugins.
+#
 # Inspired in https://github.com/Eriner/zim/blob/master/templates/zlogin
 (
   # Function to determine the need of a zcompile. If the .zwc file

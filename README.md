@@ -122,9 +122,10 @@ your `~/.zshrc`:
 
 The script `extras/compile-zsh-files.zsh` shows an example on how to compile
 ZSH files and plugins. You can copy it somewhere and adapt it to your needs,
-or you can call it directly by using:
+or you can call it directly by adding the following lines **at the end of your
+`~/.zshrc`**:
 
-    zit-in "https://github.com/m45t3r/zit" ".zit"
+    zit-in "https://github.com/m45t3r/zit" ".zit" # Skip if Zit is already installed
     zit-lo ".zit" "extras/compile-zsh-files.zsh"
 
 ### How can I run a bash/ksh/sh plugin?
