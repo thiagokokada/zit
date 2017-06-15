@@ -14,6 +14,16 @@ test_loading_module() {
   assertEquals "Hello World!" "${result}"
 }
 
+test_loading_sh_module() {
+  local result=$(emulate sh -c 'zit-load "module" "dummy.sh"')
+  assertEquals "Hello World!" "${result}"
+}
+
+test_loading_bash_module() {
+  local result=$(emulate bash -c 'zit-load "module" "dummy.bash"')
+  assertEquals "Hello World!" "${result}"
+}
+
 test_loading_module_with_space() {
   local result=$(zit-load "another module" "dummy.zsh")
   assertEquals "Another Hello World!" "${result}"
