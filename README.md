@@ -120,10 +120,12 @@ your `~/.zshrc`:
 
 ### How can I compile my ZSH plugins to speed up initialization?
 
-You can simply call compilation of your installed modules yourself inside your
-`~/.zlogin`. Look at the `zlogin` file from Zim for example:
-<https://github.com/Eriner/zim/blob/master/templates/zlogin>. You can simply
-edit this file to include your `ZIT_MODULES_PATH`, for example.
+The script `extras/compile-zsh-files.zsh` shows an example on how to compile
+ZSH files and plugins. You can copy it somewhere and adapt it to your needs,
+or you can call it directly by using:
+
+    zit-in "https://github.com/m45t3r/zit" ".zit"
+    zit-lo ".zit" "extras/compile-zsh-files.zsh"
 
 ### How can I run a bash/ksh/sh plugin?
 
