@@ -26,6 +26,17 @@ EOF
   assertEquals "${expect}" "${result}"
 }
 
+test_install_non_standard_directory() {
+  local tmpdir=$(mktemp -d)
+  local result=$(ZIT_MODULES_PATH="${tmpdir}" zit-install "${REPO_URL}" "zit")
+  local expect=$(cat <<EOF
+Installing ${tmpdir}/zit
+git clone --recursive ${REPO_URL} -b master ${tmpdir}/zit
+EOF
+  )
+  assertEquals "${expect}" "${result}"
+}
+
 test_install_with_branch() {
   local result=$(zit-install "${REPO_URL}#branch_name" "zit")
   local expect=$(cat <<EOF

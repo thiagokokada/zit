@@ -14,6 +14,12 @@ test_loading_module() {
   assertEquals "Hello World!" "${result}"
 }
 
+test_loading_module_from_non_standard_directory() {
+  local result=$(ZIT_MODULES_PATH="test" zit-load "module" "dummy.zsh" 2>&1)
+  echo "${result}" | grep "test/module/dummy.zsh" &> /dev/null
+  assertTrue "${?}"
+}
+
 test_loading_sh_module() {
   local result=$(emulate sh -c 'zit-load "module" "dummy.sh"')
   assertEquals "Hello World!" "${result}"
