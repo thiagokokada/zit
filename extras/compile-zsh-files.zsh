@@ -10,6 +10,13 @@
 #
 # Inspired in https://github.com/Eriner/zim/blob/master/templates/zlogin
 (
+  # Guard clause, to avoid compiling multiple times if opening
+  # multiple shells
+  if (( ${+ZSH_COMPILING_FILES} )); then
+    return
+  fi
+  export ZSH_COMPILING_FILES=1
+
   # Function to determine the need of a zcompile. If the .zwc file
   # does not exist, or the base file is newer, we need to compile.
   # These jobs are asynchronous, and will not impact the interactive shell
@@ -38,4 +45,5 @@
     done
   done
 
+  unset ZSH_COMPILING_FILES
 ) &!
