@@ -62,6 +62,8 @@ zit-install() {
     command git clone --recursive "${git_repo}" -b "${git_branch}" "${module_dir}"
     printf "\n"
   fi
+  # added to global dir array for updater
+  ZIT_MODULES_LOADED+=("${module_dir}")
 }
 
 # do both above in one step
