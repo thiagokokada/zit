@@ -105,7 +105,7 @@ Travis-CI we are running Git `1.9.x` and it is working great.
 
 ## Examples
 
-You can see examples of Zit utilization in 
+You can see examples of Zit utilization in
 [my dotfiles](https://github.com/m45t3r/dotfiles/tree/master/zsh).
 
 ## FAQ
@@ -124,3 +124,24 @@ You can simply call compilation of your installed modules yourself inside your
 `~/.zlogin`. Look at the `zlogin` file from Zim for example:
 <https://github.com/Eriner/zim/blob/master/templates/zlogin>. You can simply
 edit this file to include your `ZIT_MODULES_PATH`, for example.
+
+### How can I run a bash/ksh/sh plugin?
+
+You can simply try `zit-in/zit-lo` or `zit-il` and see if it will work. If
+not, you can try to run `zit lo` in compatibility mode:
+
+    # You can't use zit-il in this case, since we want to run only zit-lo
+    # in emulation mode.
+    zit-in "https://github.com/author/random-bash-plugin" "random-bash-plugin"
+    emulate bash -c 'zit-lo "random-bash-plugin" "plugin.bash"'
+
+Just remember that this may not work either since ZSH emulation is not
+perfect.
+
+### How can I use zit to manage scripts like fasd?
+
+If you want to use zit to manage scripts that should be added to the `PATH`
+instead of using `source` to load, you can do the following:
+
+    zit-in "https://github.com/clvv/fasd" "fasd"
+    export PATH="${ZIT_MODULES_PATH}/fasd:${PATH}"
