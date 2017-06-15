@@ -68,7 +68,7 @@ Zit also provide some command alias so you can type slightly less:
 
 ## Installation
 
-There is different ways to install Zit. The simplest one is to copy the file
+There are different ways to install Zit. The simplest one is to copy the file
 `zit.zsh` somewhere in your home directory and source it in your `~/.zshrc`.
 This will always work because I want the source code of Zit to be
 self-contained inside this one file.
@@ -130,8 +130,7 @@ edit this file to include your `ZIT_MODULES_PATH`, for example.
 You can simply try `zit-in/zit-lo` or `zit-il` and see if it will work. If
 not, you can try to run `zit lo` in compatibility mode:
 
-    # You can't use zit-il in this case, since we want to run only zit-lo
-    # in emulation mode.
+    # You can't use zit-il in this case, since we want to run only zit-lo in emulation mode.
     zit-in "https://github.com/author/random-bash-plugin" "random-bash-plugin"
     emulate bash -c 'zit-lo "random-bash-plugin" "plugin.bash"'
 
