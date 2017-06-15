@@ -116,7 +116,13 @@ Because some plugins assume that they're running from home. If this isn't a
 problem for you, you can simply set your `ZIT_MODULES_PATH` to something in
 your `~/.zshrc`:
 
-    ZIT_MODULES_PATH="$HOME/.zit.d"
+    export ZIT_MODULES_PATH="$HOME/.zit.d"
+
+If you set `ZIT_MODULES_PATH`, however there is one plugin that has hard-coded
+paths, you can do the following:
+
+    ZIT_MODULES_PATH="$HOME" zit-in "https://github.com/author/random" ".random"
+    ZIT_MODULES_PATH="$HOME" zit-lo ".random" "random.zsh"
 
 ### How can I compile my ZSH plugins to speed up initialization?
 
