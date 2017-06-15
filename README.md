@@ -146,9 +146,9 @@ not, you can try to run `zit lo` in compatibility mode:
 Just remember that this may not work either since ZSH emulation is not
 perfect.
 
-### How can I use zit to manage scripts like fasd?
+### How can I use Zit to manage scripts like fasd?
 
-If you want to use zit to manage scripts that should be added to the `PATH`
+If you want to use Zit to manage scripts that should be added to the `PATH`
 instead of using `source` to load, you can do the following:
 
     zit-in "https://github.com/clvv/fasd" "fasd"
