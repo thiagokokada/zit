@@ -107,8 +107,7 @@ The tests are known to break in versions `<5.1`, however fixes are welcome if
 you happen to use an older version of ZSH.
 
 For Git, version `1.7` and above should work. Probably even older versions
-should still work, since Zit does not use any advanced Git features. In
-Travis-CI we are running Git `1.9.x` and it is working great.
+should still work, since Zit does not use any advanced Git features.
 
 ## Examples
 

@@ -10,12 +10,14 @@ run_test() {
   printf "\n"
 }
 
-printf "ZSH VERSION=%s\n\n" "${ZSH_VERSION}"
+git --version
+zsh --version
+printf "\n"
 
-echo "Running ShellCheck"
+printf "Running ShellCheck\n"
 shellcheck --version
 shellcheck -s bash "../zit.zsh"
-echo
+printf "\n"
 
 run_test test_zit_aliases
 run_test test_zit_get_branch
