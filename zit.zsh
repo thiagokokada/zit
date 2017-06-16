@@ -9,17 +9,17 @@ fi
 
 # https://github.com/m45t3r/zit#branch -> https://github.com/m45t3r/zit
 _zit-get-repo() {
-  eval "${1}=\"\${2%'#'*}\""
+  printf "%s\n" "${1%'#'*}"
 }
 
 # https://github.com/m45t3r/zit -> master
 # https://github.com/m45t3r/zit#branch -> branch
 _zit-get-branch() {
-  local branch="${2#*'#'}"
-  if [[ "${branch}" = "${2}" ]]; then
-    eval "${1}=master"
+  local branch="${1#*'#'}"
+  if [[ "${branch}" = "${1}" ]]; then
+    printf "master\n"
   else
-    eval "${1}=\"\${branch}\""
+    printf "%s\n" "${branch}"
   fi
 }
 
@@ -52,8 +52,8 @@ zit-install() {
   _zit-param-validation "Git repo" "${1}" || return 1
   _zit-param-validation "Module directory" "${2}" || return 1
 
-  local git_repo; _zit-get-repo git_repo "${1}"
-  local git_branch; _zit-get-branch git_branch "${1}"
+  local git_repo; git_repo="$(_zit-get-repo "${1}")"
+  local git_branch; git_branch="$(_zit-get-branch "${1}")"
   local module_dir="${ZIT_MODULES_PATH}/${2}"
 
   # clone module
