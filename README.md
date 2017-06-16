@@ -23,14 +23,21 @@ The first command of Zit is `install`:
     $ zit-install "https://github.com/Eriner/zim/" ".zim"
 
 The command above will clone [Eriner/zim](https://github.com/Eriner/zim) inside
-`ZIT_MODULES_PATH/.zim` (by default, `ZIT_MODULES_PATH` is defined as the value
-of your `ZDOTDIR` variable or your home directory). However, if
-`ZIT_MODULES_PATH/.zim` already exists, it will do nothing.
+`ZIT_MODULES_PATH/.zim` during the next start of your ZSH (or if you do a
+`source ~/.zshrc`). However, if `ZIT_MODULES_PATH/.zim` already exists, it will
+do nothing.
+
+By the way, the default value of `ZIT_MODULES_PATH` is defined as the value of
+your `ZDOTDIR` variable or your home directory.
 
 After install, you can load ZIM by running:
 
     $ zit-load ".zim" "init.zsh"
 
+`zit-load` also supports loading local plugins. Say I have a local plugins in
+`~/.local-plugin` directory named `local.zsh`:
+
+    $ zit-load ".local-plugin" "local.zsh"
 
 Zit also supports Git branches. To do so, pass the branch using `#branch` after
 the repository url during `zit-install` call:
@@ -118,7 +125,7 @@ your `~/.zshrc`:
 
     export ZIT_MODULES_PATH="$HOME/.zit.d"
 
-If you set `ZIT_MODULES_PATH`, however there is one plugin that has hard-coded
+If you set `ZIT_MODULES_PATH`, and there is one plugin that has hard-coded
 paths, you can do the following:
 
     ZIT_MODULES_PATH="$HOME" zit-in "https://github.com/author/random" ".random"
