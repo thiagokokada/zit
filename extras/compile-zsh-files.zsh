@@ -40,7 +40,7 @@
 
   # compile Zit plugins
   for module_dir in ${ZIT_MODULES_LOADED}; do
-    for file in ${module_dir}/**/*.zsh; do
+    for file in ${module_dir}/**/*.*sh; do
       zcompare ${file}
     done
   done
