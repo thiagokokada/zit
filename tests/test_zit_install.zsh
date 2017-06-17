@@ -17,49 +17,49 @@ tearDown() {
 }
 
 test_install_without_branch() {
-  local result=$(zit-install "${REPO_URL}" "zit")
-  local expect=$(cat <<EOF
+  local result="$(zit-install "${REPO_URL}" "zit")"
+  local expect="$(cat <<EOF
 Installing ${ZIT_MODULES_PATH}/zit
 git clone --recursive ${REPO_URL} -b master ${ZIT_MODULES_PATH}/zit
 EOF
-  )
+  )"
   assertEquals "${expect}" "${result}"
 }
 
 test_install_non_standard_directory() {
-  local tmpdir=$(mktemp -d)
-  local result=$(ZIT_MODULES_PATH="${tmpdir}" zit-install "${REPO_URL}" "zit")
-  local expect=$(cat <<EOF
+  local tmpdir="$(mktemp -d)"
+  local result="$(ZIT_MODULES_PATH="${tmpdir}" zit-install "${REPO_URL}" "zit")"
+  local expect="$(cat <<EOF
 Installing ${tmpdir}/zit
 git clone --recursive ${REPO_URL} -b master ${tmpdir}/zit
 EOF
-  )
+  )"
   assertEquals "${expect}" "${result}"
 }
 
 test_install_with_branch() {
-  local result=$(zit-install "${REPO_URL}#branch_name" "zit")
-  local expect=$(cat <<EOF
+  local result="$(zit-install "${REPO_URL}#branch_name" "zit")"
+  local expect="$(cat <<EOF
 Installing ${ZIT_MODULES_PATH}/zit
 git clone --recursive ${REPO_URL} -b branch_name ${ZIT_MODULES_PATH}/zit
 EOF
-  )
+  )"
   assertEquals "${expect}" "${result}"
 }
 
 test_install_multiple_times() {
   mkdir -p "${ZIT_MODULES_PATH}/zit" # simulate another zit-in call
-  local result=$(zit-install "${REPO_URL}" "zit")
+  local result="$(zit-install "${REPO_URL}" "zit")"
   assertNull "${result}"
 }
 
 test_missing_param_git_repo() {
-  local result=$(zit-install)
+  local result="$(zit-install)"
   assertEquals "[zit] Missing argument: Git repo" "${result}"
 }
 
 test_missing_param_module_dir() {
-  local result=$(zit-install "https://github.com/m45t3r/zit")
+  local result="$(zit-install "https://github.com/m45t3r/zit")"
   assertEquals "[zit] Missing argument: Module directory" "${result}"
 }
 

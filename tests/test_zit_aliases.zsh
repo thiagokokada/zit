@@ -14,22 +14,22 @@ setUp() {
 }
 
 test_alias_zit_in() {
-  local result=$(zit-in)
+  local result="$(zit-in)"
   assertEquals "zit-install" "${result}"
 }
 
 test_alias_zit_lo() {
-  local result=$(zit-lo)
+  local result="$(zit-lo)"
   assertEquals "zit-load" "${result}"
 }
 
 test_alias_zit_il() {
-  local result=$(zit-il)
+  local result="$(zit-il)"
   assertEquals "zit-install-load" "${result}"
 }
 
 test_alias_zit_up() {
-  local result=$(zit-up)
+  local result="$(zit-up)"
   assertEquals "zit-update" "${result}"
 }
 

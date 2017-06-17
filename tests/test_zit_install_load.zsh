@@ -12,27 +12,27 @@ setUp() {
 }
 
 test_repo_directory_dotzsh() {
-  local result=$(zit-install-load "https://github.com/m45t3r/zit" "zit" "zit.zsh")
-  local expect=$(cat <<EOF
+  local result="$(zit-install-load "https://github.com/m45t3r/zit" "zit" "zit.zsh")"
+  local expect="$(cat <<EOF
 zit-install https://github.com/m45t3r/zit zit
 zit-load zit zit.zsh
 EOF
-  )
+  )"
   assertEquals "${expect}" "${result}"
 }
 
 test_missing_param_git_repo() {
-  local result=$(zit-install-load)
+  local result="$(zit-install-load)"
   assertEquals "[zit] Missing argument: Git repo" "${result}"
 }
 
 test_missing_param_module_dir() {
-  local result=$(zit-install-load "https://github.com/m45t3r/zit")
+  local result="$(zit-install-load "https://github.com/m45t3r/zit")"
   assertEquals "[zit] Missing argument: Module directory" "${result}"
 }
 
 test_missing_param_dot_zsh() {
-  local result=$(zit-install-load "https://github.com/m45t3r/zit" "zit")
+  local result="$(zit-install-load "https://github.com/m45t3r/zit" "zit")"
   assertEquals "[zit] Missing argument: .zsh file" "${result}"
 }
 

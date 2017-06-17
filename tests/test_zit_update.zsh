@@ -18,21 +18,21 @@ tearDown() {
 }
 
 test_update_without_repos() {
-  local result=$(zit-update)
+  local result="$(zit-update)"
   assertNull "${result}"
 }
 
 test_update_with_repos() {
   ZIT_MODULES_LOADED=("${ZIT_MODULES_PATH}/a" "${ZIT_MODULES_PATH}/b")
-  local result=$(zit-update)
-  local expect=$(cat << EOF
+  local result="$(zit-update)"
+  local expect="$(cat << EOF
 Updating ${ZIT_MODULES_PATH}/a
 git pull
 
 Updating ${ZIT_MODULES_PATH}/b
 git pull
 EOF
-  )
+  )"
   assertEquals "${expect}" "${result}"
 }
 
