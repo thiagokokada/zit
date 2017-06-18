@@ -8,7 +8,6 @@ addons:
     packages:
       - shellcheck
 env:
-  - USING_ZSH_VERSION="zsh-4.3.17"
   - USING_ZSH_VERSION="zsh-5.0.8"
   - USING_ZSH_VERSION="zsh-5.1.1"
   - USING_ZSH_VERSION="zsh-5.2"
