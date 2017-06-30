@@ -59,7 +59,7 @@ zit-install() {
   # clone module
   if [[ ! -d "${module_dir}" ]]; then
     printf "Installing %s\n" "${module_dir}"
-    command git clone --recursive "${git_repo}" -b "${git_branch}" "${module_dir}"
+    git clone --recurse-submodules "${git_repo}" -b "${git_branch}" "${module_dir}"
     printf "\n"
   fi
   # added to global dir array for updater
@@ -85,7 +85,7 @@ zit-update() {
   for module_dir in "${ZIT_MODULES_LOADED[@]}"; do
     pushd "${module_dir}" > /dev/null || continue
     printf "Updating %s\n" "${module_dir}"
-    command git pull
+    git pull && git submodule update --init
     printf "\n"
     popd > /dev/null || continue
   done

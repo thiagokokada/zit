@@ -28,9 +28,11 @@ test_update_with_repos() {
   local expect="$(cat << EOF
 Updating ${ZIT_MODULES_PATH}/a
 git pull
+git submodule update --init
 
 Updating ${ZIT_MODULES_PATH}/b
 git pull
+git submodule update --init
 EOF
   )"
   assertEquals "${expect}" "${result}"

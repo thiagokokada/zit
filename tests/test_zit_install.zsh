@@ -20,7 +20,7 @@ test_install_without_branch() {
   local result="$(zit-install "${REPO_URL}" "zit")"
   local expect="$(cat <<EOF
 Installing ${ZIT_MODULES_PATH}/zit
-git clone --recursive ${REPO_URL} -b master ${ZIT_MODULES_PATH}/zit
+git clone --recurse-submodules ${REPO_URL} -b master ${ZIT_MODULES_PATH}/zit
 EOF
   )"
   assertEquals "${expect}" "${result}"
@@ -31,7 +31,7 @@ test_install_non_standard_directory() {
   local result="$(ZIT_MODULES_PATH="${tmpdir}" zit-install "${REPO_URL}" "zit")"
   local expect="$(cat <<EOF
 Installing ${tmpdir}/zit
-git clone --recursive ${REPO_URL} -b master ${tmpdir}/zit
+git clone --recurse-submodules ${REPO_URL} -b master ${tmpdir}/zit
 EOF
   )"
   assertEquals "${expect}" "${result}"
@@ -41,7 +41,7 @@ test_install_with_branch() {
   local result="$(zit-install "${REPO_URL}#branch_name" "zit")"
   local expect="$(cat <<EOF
 Installing ${ZIT_MODULES_PATH}/zit
-git clone --recursive ${REPO_URL} -b branch_name ${ZIT_MODULES_PATH}/zit
+git clone --recurse-submodules ${REPO_URL} -b branch_name ${ZIT_MODULES_PATH}/zit
 EOF
   )"
   assertEquals "${expect}" "${result}"

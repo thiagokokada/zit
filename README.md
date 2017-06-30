@@ -104,8 +104,7 @@ in the following versions of ZSH in [Travis-CI](https://travis-ci.org/m45t3r/zit
 - `5.2`
 - `5.3.1`
 
-For Git, version `1.7.10` and above should work. Probably even older versions
-should still work, since Zit does not use any advanced Git features.
+For Git, version `1.9.0` and above are supported.
 
 ## Examples
 
