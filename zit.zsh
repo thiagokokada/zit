@@ -16,7 +16,7 @@ _zit-get-repo() {
 # https://github.com/m45t3r/zit#branch -> branch
 _zit-get-branch() {
   local branch="${1#*'#'}"
-  if [[ "${branch}" = "${1}" ]]; then
+  if [[ -z "${branch}" || "${branch}" == "${1}" ]]; then
     printf "master\n"
   else
     printf "%s\n" "${branch}"
