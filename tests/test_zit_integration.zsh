@@ -38,7 +38,7 @@ test_zit_in_script_path() {
 }
 
 test_zit_in_zit_lo_with_branch() {
-  zit-in "https://github.com/Eriner/zim#master" "zim"
+  zit-in "https://github.com/Eriner/zim#zsh-5.0" "zim"
   assertTrue "${?}"
   zit-lo "zim" "modules/directory/init.zsh"
   assertTrue "${?}"
