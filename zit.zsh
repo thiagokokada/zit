@@ -2,6 +2,7 @@
 
 # store all loaded modules to paths
 export -Ua ZIT_MODULES_LOADED
+
 # set variable below to change zit modules path
 if [[ -z "${ZIT_MODULES_PATH}" ]]; then
   export ZIT_MODULES_PATH="${ZDOTDIR:-${HOME}}"
@@ -16,6 +17,7 @@ _zit-get-repo() {
 # https://github.com/m45t3r/zit#branch -> branch
 _zit-get-branch() {
   local branch="${1#*'#'}"
+
   if [[ -z "${branch}" || "${branch}" == "${1}" ]]; then
     printf "master\n"
   else
@@ -26,6 +28,7 @@ _zit-get-branch() {
 _zit-param-validation() {
   local name="${1}"
   local param="${2}"
+
   if [[ -z "${param}" ]]; then
     printf "[zit] Missing argument: %s\n" "${name}"
     return 1
@@ -36,13 +39,13 @@ _zit-param-validation() {
 # loader
 zit-load() {
   _zit-param-validation "Module directory" "${1}" || return 1
-  _zit-param-validation ".zsh file" "${2}" || return 1
+  _zit-param-validation ".zsh file" "${2}" || return 2
 
   local module_dir="${ZIT_MODULES_PATH}/${1}"
   local dot_zsh="${2}"
 
   # shellcheck source=/dev/null
-  source "${module_dir}/${dot_zsh}" || return 1
+  source "${module_dir}/${dot_zsh}" || return 255
   # added to global dir array for updater
   ZIT_MODULES_LOADED+=("${module_dir}")
 }
@@ -50,7 +53,7 @@ zit-load() {
 # installer
 zit-install() {
   _zit-param-validation "Git repo" "${1}" || return 1
-  _zit-param-validation "Module directory" "${2}" || return 1
+  _zit-param-validation "Module directory" "${2}" || return 2
 
   local git_repo; git_repo="$(_zit-get-repo "${1}")"
   local git_branch; git_branch="$(_zit-get-branch "${1}")"
@@ -69,8 +72,8 @@ zit-install() {
 # do both above in one step
 zit-install-load() {
   _zit-param-validation "Git repo" "${1}" || return 1
-  _zit-param-validation "Module directory" "${2}" || return 1
-  _zit-param-validation ".zsh file" "${3}" || return 1
+  _zit-param-validation "Module directory" "${2}" || return 2
+  _zit-param-validation ".zsh file" "${3}" || return 3
 
   local git_repo="${1}"
   local module_dir="${2}"
