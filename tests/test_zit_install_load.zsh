@@ -6,16 +6,27 @@ SHUNIT_PARENT=$0
 source ../zit.zsh
 
 setUp() {
+  REPO_URL="https://github.com/m45t3r/zit"
   # mocking real zit functions
   zit-install() { echo "zit-install" "${@}" }
   zit-load() { echo "zit-load" "${@}" }
 }
 
-test_repo_directory_dotzsh() {
-  local result="$(zit-install-load "https://github.com/m45t3r/zit" "zit" "zit.zsh")"
+test_install_load() {
+  local result="$(zit-install-load "${REPO_URL}" "zit" "zit.zsh")"
   local expect="$(cat <<EOF
-zit-install https://github.com/m45t3r/zit zit
-zit-load zit zit.zsh
+zit-install https://github.com/m45t3r/zit zit 0
+zit-load zit zit.zsh 1
+EOF
+  )"
+  assertEquals "${expect}" "${result}"
+}
+
+test_install_load_without_upgrade() {
+  local result="$(zit-install-load "${REPO_URL}" "zit" "zit.zsh" 0)"
+  local expect="$(cat <<EOF
+zit-install https://github.com/m45t3r/zit zit 0
+zit-load zit zit.zsh 0
 EOF
   )"
   assertEquals "${expect}" "${result}"
@@ -27,12 +38,12 @@ test_missing_param_git_repo() {
 }
 
 test_missing_param_module_dir() {
-  local result="$(zit-install-load "https://github.com/m45t3r/zit")"
+  local result="$(zit-install-load "${REPO_URL}")"
   assertEquals "[zit] Missing argument: Module directory" "${result}"
 }
 
 test_missing_param_dot_zsh() {
-  local result="$(zit-install-load "https://github.com/m45t3r/zit" "zit")"
+  local result="$(zit-install-load "${REPO_URL}" "zit")"
   assertEquals "[zit] Missing argument: .zsh file" "${result}"
 }
 

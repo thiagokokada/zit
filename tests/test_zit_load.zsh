@@ -10,14 +10,36 @@ setUp() {
 }
 
 test_loading_module() {
-  local result="$(zit-load "module" "dummy.zsh")"
-  assertEquals "Hello World!" "${result}"
+  local result="$(zit-load "module" "dummy.zsh";
+                  echo "ZIT_MODULES_UPGRADE: ${ZIT_MODULES_UPGRADE}")"
+  local expect="$(cat <<EOF
+Hello World!
+ZIT_MODULES_UPGRADE: mocks/module
+EOF
+  )"
+  assertEquals "${expect}" "${result}"
 }
 
 test_loading_module_from_non_standard_directory() {
-  local result="$(ZIT_MODULES_PATH="test" zit-load "module" "dummy.zsh" 2>&1)"
-  echo "${result}" | grep "test/module/dummy.zsh" &> /dev/null
-  assertTrue "${?}"
+  local result="$(ZIT_MODULES_PATH="mocks/test" zit-load "module" "dummy.zsh";
+                  echo "ZIT_MODULES_UPGRADE: ${ZIT_MODULES_UPGRADE}")"
+  local expect="$(cat <<EOF
+Hello World!
+ZIT_MODULES_UPGRADE: mocks/test/module
+EOF
+  )"
+  assertEquals "${expect}" "${result}"
+}
+
+test_loading_module_without_upgrade() {
+  local result="$(zit-load "module" "dummy.zsh" 0;
+                  echo "ZIT_MODULES_UPGRADE: ${ZIT_MODULES_UPGRADE}")"
+  local expect="$(cat <<EOF
+Hello World!
+ZIT_MODULES_UPGRADE: 
+EOF
+  )"
+  assertEquals "${expect}" "${result}"
 }
 
 test_loading_sh_module() {

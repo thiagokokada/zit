@@ -23,7 +23,7 @@ test_update_without_repos() {
 }
 
 test_update_with_repos() {
-  ZIT_MODULES_LOADED=("${ZIT_MODULES_PATH}/a" "${ZIT_MODULES_PATH}/b")
+  ZIT_MODULES_UPGRADE=("${ZIT_MODULES_PATH}/a" "${ZIT_MODULES_PATH}/b")
   local result="$(zit-update)"
   local expect="$(cat << EOF
 Updating ${ZIT_MODULES_PATH}/a

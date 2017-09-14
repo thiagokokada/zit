@@ -1,7 +1,7 @@
 # Zit - minimal plugin manager for ZSH
 
-# store all loaded modules to paths
-export -Ua ZIT_MODULES_LOADED
+# store all modules to be upgraded
+export -Ua ZIT_MODULES_UPGRADE
 
 # set variable below to change zit modules path
 if [[ -z "${ZIT_MODULES_PATH}" ]]; then
@@ -43,11 +43,12 @@ zit-load() {
 
   local module_dir="${ZIT_MODULES_PATH}/${1}"
   local dot_zsh="${2}"
+  local upgrade="${3:-1}"
 
   # shellcheck source=/dev/null
   source "${module_dir}/${dot_zsh}" || return 255
   # added to global dir array for updater
-  ZIT_MODULES_LOADED+=("${module_dir}")
+  [[ "${upgrade}" -eq 1 ]] && ZIT_MODULES_UPGRADE+=("${module_dir}")
 }
 
 # installer
@@ -58,6 +59,7 @@ zit-install() {
   local git_repo; git_repo="$(_zit-get-repo "${1}")"
   local git_branch; git_branch="$(_zit-get-branch "${1}")"
   local module_dir="${ZIT_MODULES_PATH}/${2}"
+  local upgrade="${3:-1}"
 
   # clone module
   if [[ ! -d "${module_dir}" ]]; then
@@ -66,7 +68,7 @@ zit-install() {
     printf "\n"
   fi
   # added to global dir array for updater
-  ZIT_MODULES_LOADED+=("${module_dir}")
+  [[ "${upgrade}" -eq 1 ]] && ZIT_MODULES_UPGRADE+=("${module_dir}")
 }
 
 # do both above in one step
@@ -78,16 +80,17 @@ zit-install-load() {
   local git_repo="${1}"
   local module_dir="${2}"
   local dot_zsh="${3}"
+  local upgrade="${4:-1}"
 
-  zit-install "${git_repo}" "${module_dir}"
-  zit-load "${module_dir}" "${dot_zsh}"
+  zit-install "${git_repo}" "${module_dir}" 0 # only add to ZIT_MODULES_UPGRADE once
+  zit-load "${module_dir}" "${dot_zsh}" "${upgrade}"
 }
 
 # updater
 zit-update() {
   local module_dir
 
-  for module_dir in "${ZIT_MODULES_LOADED[@]}"; do
+  for module_dir in "${ZIT_MODULES_UPGRADE[@]}"; do
     pushd "${module_dir}" > /dev/null || continue
     printf "Updating %s\n" "${module_dir}"
     git pull

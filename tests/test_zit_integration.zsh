@@ -25,7 +25,7 @@ test_zit_in_zit_lo() {
 test_zit_in_zit_lo_compat_with_other_shells() {
   zit-in "https://github.com/kennethreitz/autoenv" "autoenv"
   assertTrue "${?}"
-  emulate sh -c 'zit-lo "autoenv" "activate.sh"'
+  emulate sh -c 'zit-load "autoenv" "activate.sh"'
   assertTrue "${?}"
 }
 
