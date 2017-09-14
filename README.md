@@ -34,11 +34,6 @@ After install, you can load ZIM by running:
 
     $ zit-load ".zim" "init.zsh"
 
-`zit-load` also supports loading local plugins. Say I have a local plugins in
-`~/.local-plugin` directory named `local.zsh`:
-
-    $ zit-load ".local-plugin" "local.zsh"
-
 Zit also supports Git branches. To do so, pass the branch using `#branch` after
 the repository url during `zit-install` call:
 
@@ -144,7 +139,8 @@ not, you can try to run `zit lo` in compatibility mode:
 
     # You can't use zit-il in this case, since we want to run only zit-lo in emulation mode.
     zit-in "https://github.com/author/random-bash-plugin" "random-bash-plugin"
-    emulate bash -c 'zit-lo "random-bash-plugin" "plugin.bash"'
+    # You may need to avoid aliases in emulation mode
+    emulate bash -c 'zit-load "random-bash-plugin" "plugin.bash"'
 
 Just remember that this may not work either since ZSH emulation is not
 perfect.
@@ -156,3 +152,26 @@ instead of using `source` to load, you can do the following:
 
     zit-in "https://github.com/clvv/fasd" "fasd"
     export PATH="${ZIT_MODULES_PATH}/fasd:${PATH}"
+
+### How can I use Zit to manage local plugins?
+
+Passing the last parameter as `0` to `zit-load` does the trick:
+
+    zit-load ".local-plugin" "local.zsh" 0 # disables upgrade
+
+This will load a local plugin from `~/.local-plugin` directory named `local.zsh`
+and disables upgrade for this module, so `zit-update` does not try to update it.
+
+### How can I force a specific version of module in Zit?
+
+Both `zit-install-load` and `zit-install` also supports last parameter `0` to
+disable upgrading:
+
+    zit-install "https://github.com/Eriner/zim/" ".zim" 0 
+    zit-install-load "https://github.com/Eriner/zim/" ".zim" "init.zsh" 0
+
+So lets say you want to use `Eriner/zim` with commit `abcde`, you can declare
+in your `~/.zshrc` the last command above and run:
+
+    $ cd ~/.zim
+    $ git checkout abcde
