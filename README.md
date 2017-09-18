@@ -103,6 +103,7 @@ in the following versions of ZSH in [Travis-CI](https://travis-ci.org/m45t3r/zit
 - `5.1.1`
 - `5.2`
 - `5.3.1`
+- `5.4.2`
 
 For Git, version `1.9.0` and above are supported.
 
