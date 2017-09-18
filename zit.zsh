@@ -1,5 +1,8 @@
 # Zit - minimal plugin manager for ZSH
 
+# store all loaded modules to paths
+export -Ua ZIT_MODULES_LOADED
+
 # store all modules to be upgraded
 export -Ua ZIT_MODULES_UPGRADE
 
@@ -43,12 +46,11 @@ zit-load() {
 
   local module_dir="${ZIT_MODULES_PATH}/${1}"
   local dot_zsh="${2}"
-  local upgrade="${3:-1}"
 
   # shellcheck source=/dev/null
   source "${module_dir}/${dot_zsh}" || return 255
-  # added to global dir array for updater
-  [[ "${upgrade}" -eq 1 ]] && ZIT_MODULES_UPGRADE+=("${module_dir}")
+  # added to global dir array for tracking
+  ZIT_MODULES_LOADED+=("${module_dir}")
 }
 
 # installer
@@ -82,7 +84,7 @@ zit-install-load() {
   local dot_zsh="${3}"
   local upgrade="${4:-1}"
 
-  zit-install "${git_repo}" "${module_dir}" 0 # only add to ZIT_MODULES_UPGRADE once
+  zit-install "${git_repo}" "${module_dir}"
   zit-load "${module_dir}" "${dot_zsh}" "${upgrade}"
 }
 
