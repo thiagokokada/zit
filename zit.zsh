@@ -11,20 +11,6 @@ if [[ -z "${ZIT_MODULES_PATH}" ]]; then
   export ZIT_MODULES_PATH="${ZDOTDIR:-${HOME}}"
 fi
 
-_zit-get-repo() {
-  printf "%s\n" "${1%'#'*}"
-}
-
-_zit-get-branch() {
-  local branch="${1#*'#'}"
-
-  if [[ -z "${branch}" || "${branch}" == "${1}" ]]; then
-    printf "master\n"
-  else
-    printf "%s\n" "${branch}"
-  fi
-}
-
 _zit-param-validation() {
   local name="${1}"
   local param="${2}"
