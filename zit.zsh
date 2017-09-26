@@ -11,13 +11,10 @@ if [[ -z "${ZIT_MODULES_PATH}" ]]; then
   export ZIT_MODULES_PATH="${ZDOTDIR:-${HOME}}"
 fi
 
-# https://github.com/m45t3r/zit#branch -> https://github.com/m45t3r/zit
 _zit-get-repo() {
   printf "%s\n" "${1%'#'*}"
 }
 
-# https://github.com/m45t3r/zit -> master
-# https://github.com/m45t3r/zit#branch -> branch
 _zit-get-branch() {
   local branch="${1#*'#'}"
 
@@ -58,8 +55,13 @@ zit-install() {
   _zit-param-validation "Git repo" "${1}" || return 1
   _zit-param-validation "Module directory" "${2}" || return 2
 
-  local git_repo; git_repo="$(_zit-get-repo "${1}")"
-  local git_branch; git_branch="$(_zit-get-branch "${1}")"
+  # http://zsh.sourceforge.net/Doc/Release/Expansion.html#Parameter-Expansion
+  # https://github.com/m45t3r/zit#branch -> https://github.com/m45t3r/zit
+  local git_repo="${1%'#'*}"
+  # https://github.com/m45t3r/zit -> master
+  # https://github.com/m45t3r/zit# -> master
+  # https://github.com/m45t3r/zit#branch -> branch
+  local git_branch="${${${1#*'#'}:#${1}}:-master}"
   local module_dir="${ZIT_MODULES_PATH}/${2}"
   local upgrade="${3:-1}"
 
