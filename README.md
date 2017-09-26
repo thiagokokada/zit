@@ -90,7 +90,7 @@ And source the cloned diretory in your `~/.zshrc`
 
 In the above case you could even put in your `~/.zshrc` (after above line):
 
-    zit-load ".zit" "zit.zsh"
+    zit-install "https://github.com/m45t3r/zit" ".zit"
 
 So Zit can manage Zit updates too.
 
