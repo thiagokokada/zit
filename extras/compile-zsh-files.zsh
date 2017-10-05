@@ -28,20 +28,15 @@
 
   setopt EXTENDED_GLOB
 
-  # zcompile the completion cache; significant speedup.
-  for file in ${ZDOTDIR:-${HOME}}/.zcomp^(*.zwc)(.); do
-    zcompare ${file}
-  done
-
   # zcompile ZSH config files
   for file in ${ZDOTDIR:-${HOME}}/.{zlogin,zlogout,zprofile,zshenv,zshrc}; do
-    zcompare ${file}
+    zcompare ${file} &> /dev/null
   done
 
   # compile Zit plugins
   for module_dir in ${ZIT_MODULES_LOADED}; do
     for file in ${module_dir}/**/*.*sh(.N); do
-      zcompare ${file}
+      zcompare ${file} &> /dev/null
     done
   done
 
