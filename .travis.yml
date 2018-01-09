@@ -15,7 +15,7 @@ env:
   - USING_ZSH_VERSION="zsh-5.4.2"
 before_install:
   - cd "${HOME}"
-  - curl -L "http://downloads.sourceforge.net/zsh/${USING_ZSH_VERSION}.tar.gz" | tar zx
+  - curl -L "https://downloads.sourceforge.net/zsh/${USING_ZSH_VERSION}.tar.gz" | tar zx
   - cd "${USING_ZSH_VERSION}"
   - ./configure --prefix="${HOME}/zsh"
   - make -j2
