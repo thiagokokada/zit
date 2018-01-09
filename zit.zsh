@@ -41,15 +41,23 @@ zit-install() {
   _zit-param-validation "Git repo" "${1}" || return 1
   _zit-param-validation "Module directory" "${2}" || return 2
 
+  local git_url="${1}"
+  local module_dir="${ZIT_MODULES_PATH}/${2}"
+  local upgrade="${3:-1}"
+
   # http://zsh.sourceforge.net/Doc/Release/Expansion.html#Parameter-Expansion
   # https://github.com/m45t3r/zit#branch -> https://github.com/m45t3r/zit
-  local git_repo="${1%'#'*}"
+  local git_repo="${git_url%'#'*}"
+
+  local git_branch
   # https://github.com/m45t3r/zit -> master
   # https://github.com/m45t3r/zit# -> master
   # https://github.com/m45t3r/zit#branch -> branch
-  local git_branch="${${${1#*'#'}:#${1}}:-master}"
-  local module_dir="${ZIT_MODULES_PATH}/${2}"
-  local upgrade="${3:-1}"
+  if [[ -z ${git_url#*'#'} ]] || [[ ${git_url#*'#'} == ${git_url} ]]; then
+    git_branch="master"
+  else
+    git_branch=${git_url#*'#'}
+  fi
 
   # clone module
   if [[ ! -d "${module_dir}" ]]; then
