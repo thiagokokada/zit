@@ -16,7 +16,7 @@ _zit-param-validation() {
   local param="${2}"
 
   if [[ -z "${param}" ]]; then
-    printf "[zit] Missing argument: %s\n" "${name}"
+    printf '[zit] Missing argument: %s\n' "${name}"
     return 1
   fi
   return 0
@@ -24,8 +24,8 @@ _zit-param-validation() {
 
 # loader
 zit-load() {
-  _zit-param-validation "Module directory" "${1}" || return 1
-  _zit-param-validation ".zsh file" "${2}" || return 2
+  _zit-param-validation 'Module directory' "${1}" || return 1
+  _zit-param-validation '.zsh file' "${2}" || return 2
 
   local module_dir="${ZIT_MODULES_PATH}/${1}"
   local dot_zsh="${2}"
@@ -38,8 +38,8 @@ zit-load() {
 
 # installer
 zit-install() {
-  _zit-param-validation "Git repo" "${1}" || return 1
-  _zit-param-validation "Module directory" "${2}" || return 2
+  _zit-param-validation 'Git repo' "${1}" || return 1
+  _zit-param-validation 'Module directory' "${2}" || return 2
 
   local git_url="${1}"
   local module_dir="${ZIT_MODULES_PATH}/${2}"
@@ -59,9 +59,10 @@ zit-install() {
 
   # clone module
   if [[ ! -d "${module_dir}" ]]; then
-    printf "Installing %s\n" "${module_dir}"
-    git clone --recurse-submodules "${git_repo}" -b "${git_branch}" "${module_dir}"
-    printf "\n"
+    printf 'Installing %s\n' "${module_dir}"
+    git clone --recurse-submodules \
+      "${git_repo}" -b "${git_branch}" "${module_dir}"
+    printf '\n'
   fi
   # added to global dir array for updater
   [[ "${upgrade}" -eq 1 ]] && ZIT_MODULES_UPGRADE+=("${module_dir}")
@@ -69,9 +70,9 @@ zit-install() {
 
 # do both above in one step
 zit-install-load() {
-  _zit-param-validation "Git repo" "${1}" || return 1
-  _zit-param-validation "Module directory" "${2}" || return 2
-  _zit-param-validation ".zsh file" "${3}" || return 3
+  _zit-param-validation 'Git repo' "${1}" || return 1
+  _zit-param-validation 'Module directory' "${2}" || return 2
+  _zit-param-validation '.zsh file' "${3}" || return 3
 
   local git_repo="${1}"
   local module_dir="${2}"
@@ -88,16 +89,16 @@ zit-update() {
 
   for module_dir in "${ZIT_MODULES_UPGRADE[@]}"; do
     pushd "${module_dir}" > /dev/null || continue
-    printf "Updating %s\n" "${module_dir}"
+    printf 'Updating %s\n' "${module_dir}"
     git pull
-    printf "\n"
+    printf '\n'
     popd > /dev/null || continue
   done
 }
 
-alias zit-in="zit-install"
-alias zit-lo="zit-load"
-alias zit-il="zit-install-load"
-alias zit-up="zit-update"
+alias zit-in='zit-install'
+alias zit-lo='zit-load'
+alias zit-il='zit-install-load'
+alias zit-up='zit-update'
 
 # vim: ft=zsh
