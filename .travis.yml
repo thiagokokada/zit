@@ -1,12 +1,6 @@
 language: sh
 sudo: false
 dist: trusty
-addons:
-  apt:
-    sources:
-      - debian-sid
-    packages:
-      - shellcheck
 env:
   - USING_ZSH_VERSION="zsh-5.0.8"
   - USING_ZSH_VERSION="zsh-5.1.1"
