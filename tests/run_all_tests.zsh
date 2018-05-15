@@ -14,10 +14,12 @@ git --version
 zsh --version
 printf "\n"
 
-printf "Running ShellCheck\n"
-shellcheck --version
-shellcheck -s bash "../zit.zsh"
-printf "\n"
+if (( $+commands[shellcheck] )); then
+  printf "Running ShellCheck\n"
+  shellcheck --version
+  shellcheck -s bash "../zit.zsh"
+  printf "\n"
+fi
 
 run_test test_zit_aliases
 run_test test_zit_install
