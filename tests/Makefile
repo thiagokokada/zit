@@ -1,20 +1,33 @@
+.SILENT:
 .PHONY:
 
 all: info shellcheck tests
 
 info:
-	@uname -a
-	@git --version
-	@zsh --version
+	echo "###############"
+	echo "# System info #"
+	echo "###############"
+	uname -a
+	git --version
+	zsh --version
+	echo
 
 shellcheck:
-	@shellcheck --version
-	@shellcheck -s bash "../zit.zsh"
+	echo "########"
+	echo "# Lint #"
+	echo "########"
+	shellcheck --version
+	shellcheck -s bash "../zit.zsh"
+	echo
 
 tests:
-	@zsh "./test_zit_aliases.zsh"
-	@zsh "./test_zit_install.zsh"
-	@zsh "./test_zit_install_load.zsh"
-	@zsh "./test_zit_load.zsh"
-	@zsh "./test_zit_update.zsh"
-	@zsh "./test_zit_integration.zsh"
+	echo "#################"
+	echo "# Running tests #"
+	echo "#################"
+	zsh "./test_zit_aliases.zsh"
+	zsh "./test_zit_install.zsh"
+	zsh "./test_zit_install_load.zsh"
+	zsh "./test_zit_load.zsh"
+	zsh "./test_zit_update.zsh"
+	zsh "./test_zit_integration.zsh"
+	echo
