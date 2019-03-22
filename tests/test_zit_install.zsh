@@ -1,4 +1,4 @@
-#!/bin/zsh
+#!/usr/bin/env zsh
 
 setopt shwordsplit
 SHUNIT_PARENT=$0
@@ -6,7 +6,7 @@ SHUNIT_PARENT=$0
 source ../zit.zsh
 
 setUp() {
-  REPO_URL="https://github.com/m45t3r/zit"
+  REPO_URL="https://github.com/thiagokokada/zit"
   ZIT_MODULES_PATH=$(mktemp -d)
   # mock git
   export PATH="${PWD}/mocks/bin:${PATH}"
@@ -94,7 +94,7 @@ test_missing_param_git_repo() {
 }
 
 test_missing_param_module_dir() {
-  local result="$(zit-install "https://github.com/m45t3r/zit")"
+  local result="$(zit-install "https://github.com/thiagokokada/zit")"
   assertEquals "[zit] Missing argument: Module directory" "${result}"
 }
 

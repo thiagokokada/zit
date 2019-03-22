@@ -46,13 +46,13 @@ zit-install() {
   local upgrade="${3:-1}"
 
   # http://zsh.sourceforge.net/Doc/Release/Expansion.html#Parameter-Expansion
-  # https://github.com/m45t3r/zit#branch -> https://github.com/m45t3r/zit
+  # https://github.com/thiagokokada/zit#branch -> https://github.com/thiagokokada/zit
   local git_repo="${git_url%'#'*}"
 
   local git_branch="${git_url#*'#'}"
-  # https://github.com/m45t3r/zit -> master
-  # https://github.com/m45t3r/zit# -> master
-  # https://github.com/m45t3r/zit#branch -> branch
+  # https://github.com/thiagokokada/zit -> master
+  # https://github.com/thiagokokada/zit# -> master
+  # https://github.com/thiagokokada/zit#branch -> branch
   if [[ -z "${git_branch}" ]] || [[ "${git_branch}" == "${git_url}" ]]; then
     git_branch="master"
   fi
@@ -96,9 +96,33 @@ zit-update() {
   done
 }
 
+# remove module
+zit-remove() {
+  _zit-param-validation 'Module directory' "${1}" || return 1
+  local module_dir="${1}"
+  local module_path="${ZIT_MODULES_PATH}/${module_dir}"
+
+  if [[ -z "${ZIT_MODULES_UPGRADE[(r)${module_path}]}" ]]; then
+    printf 'No module %s is installed.\n' "${module_dir}"
+    return 255
+  fi
+
+  while true; do
+    printf 'Really delete module %s? (y/n)' "${module_dir}"
+    read -r yn
+    case $yn in
+      [Yy]* ) rm -rf "${ZIT_MODULES_PATH:?}/${module_dir}"
+              break;;
+      [Nn]* ) break;;
+      * ) echo 'Please answer (y)es or (n)o.';;
+    esac
+  done
+}
+
 alias zit-in='zit-install'
 alias zit-lo='zit-load'
 alias zit-il='zit-install-load'
 alias zit-up='zit-update'
+alias zit-rm='zit-remove'
 
 # vim: ft=zsh

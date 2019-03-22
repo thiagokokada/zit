@@ -2,7 +2,7 @@
 
 ## minimal plugin manager for ZSH
 
-[![Build Status](https://travis-ci.org/m45t3r/zit.svg?branch=master)](https://travis-ci.org/m45t3r/zit)
+[![Build Status](https://travis-ci.org/thiagokokada/zit.svg?branch=master)](https://travis-ci.org/thiagokokada/zit)
 
 Zit is yet another plugin manager for ZSH. It is minimal because it implements
 the bare minimum to be qualified as a plugin manager: it allows the user to
@@ -30,6 +30,13 @@ do nothing.
 By the way, the default value of `ZIT_MODULES_PATH` is defined as the value of
 your `ZDOTDIR` variable or your home directory.
 
+You can remove an installed module using `remove`:
+
+    $ zit-remove ".zim"
+
+This will prompt if you really want to remove the directory `ZIT_MODULES_PATH/.zim`.
+If you answer (y)es, the removal will continue.
+
 After install, you can load ZIM by running:
 
     $ zit-load ".zim" "init.zsh"
@@ -46,7 +53,9 @@ the repository url during `zit-install` call:
 
 **Important note:** Zit does not support changing branches after install. If
 you want to change a branch of an already installed branch, go to the directory
-of the installed plugin and call `git checkout branch-name` manually!
+of the installed plugin and call `git checkout branch-name` manually! An alternative
+is to use `zit-remove` to remove the module without removing it from your configuration,
+so the module will be reinstalled in the next ZSH startup.
 
 You can also call both `zit-install` and `zit-load` in one step:
 
@@ -72,6 +81,7 @@ Zit also provide some command alias so you can type slightly less:
 | `zit-load`         | `zit-lo` |
 | `zit-install-load` | `zit-il` |
 | `zit-update`       | `zit-up` |
+| `zit-remove`       | `zit-rm` |
 
 ## Installation
 
@@ -82,7 +92,7 @@ self-contained inside this one file.
 
 If you want to be fancy, you can also clone this repository:
 
-    $ git clone https://github.com/m45t3r/zit.git "${HOME}/.zit"
+    $ git clone https://github.com/thiagokokada/zit.git "${HOME}/.zit"
 
 And source the cloned diretory in your `~/.zshrc`
 
@@ -90,28 +100,31 @@ And source the cloned diretory in your `~/.zshrc`
 
 In the above case you could even put in your `~/.zshrc` (after above line):
 
-    zit-install "https://github.com/m45t3r/zit" ".zit"
+    zit-install "https://github.com/thiagokokada/zit" ".zit"
 
 So Zit can manage Zit updates too.
 
 ## Supported versions
 
-Zit supports ZSH version `5.0.0` and above. There are automated tests running
-in the following versions of ZSH in [Travis-CI](https://travis-ci.org/m45t3r/zit):
+Zit supports ZSH version `5.2.0` and above. Older versions may work however
+they're unsupported.
 
-- `5.0.8`
-- `5.1.1`
+There are automated tests running in the following versions of ZSH in
+[Travis-CI](https://travis-ci.org/thiagokokada/zit):
+
 - `5.2`
 - `5.3.1`
 - `5.4.2`
 - `5.5.1`
+- `5.6.2`
+- `5.7.1`
 
 For Git, version `1.9.0` and above are supported.
 
 ## Examples
 
 You can see examples of Zit utilization in
-[my dotfiles](https://github.com/m45t3r/dotfiles/tree/master/zsh).
+[my dotfiles](https://github.com/thiagokokada/dotfiles/tree/master/zsh).
 
 ## FAQ
 
@@ -136,7 +149,7 @@ ZSH files and plugins. You can copy it somewhere and adapt it to your needs,
 or you can call it directly by adding the following lines **at the end of your
 `~/.zshrc`**:
 
-    zit-in "https://github.com/m45t3r/zit" ".zit" # Skip if Zit is already installed
+    zit-in "https://github.com/thiagokokada/zit" ".zit" # Skip if Zit is already installed
     zit-lo ".zit" "extras/compile-zsh-files.zsh"
 
 ### How can I run a bash/ksh/sh plugin?
@@ -166,7 +179,7 @@ Both `zit-install` and `zit-install-load` supports passing the a last parameter
 to enable/disable upgrade. Pass `1` to enable (default) and pass `0` to disable
 upgrade in a specific module. For example:
 
-    zit-install "https://github.com/Eriner/zim/" ".zim" 0 
+    zit-install "https://github.com/Eriner/zim/" ".zim" 0
     zit-install-load "https://github.com/Eriner/zim/" ".zim" "init.zsh" 0
 
 So lets say you want to use `Eriner/zim` with commit `abcde`, you can declare
@@ -174,3 +187,9 @@ in your `~/.zshrc` the last command above and run:
 
     $ cd ~/.zim
     $ git checkout abcde
+
+### How can I remove a module? It keeps being reinstalled after calling `zit-rm`!
+
+Using `zit-remove` will delete the directory, however if you do not remove it from
+your `.zshrc` it will be installed again in the next ZSH startup. So do not forget
+to remove the call to `zit-install` or `zit-install-load` of your module.

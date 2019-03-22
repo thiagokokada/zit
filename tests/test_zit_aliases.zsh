@@ -1,4 +1,4 @@
-#!/bin/zsh
+#!/usr/bin/env zsh
 
 setopt shwordsplit
 SHUNIT_PARENT=$0
@@ -11,6 +11,7 @@ setUp() {
   zit-load() { echo "zit-load" }
   zit-install-load() { echo "zit-install-load" }
   zit-update() { echo "zit-update" }
+  zit-remove() {echo "zit-remove"}
 }
 
 test_alias_zit_in() {
@@ -31,6 +32,11 @@ test_alias_zit_il() {
 test_alias_zit_up() {
   local result="$(zit-up)"
   assertEquals "zit-update" "${result}"
+}
+
+test_alias_zit_rm() {
+    local result="$(zit-rm)"
+    assertEquals "zit-remove" "${result}"
 }
 
 source ./shunit2/src/shunit2
