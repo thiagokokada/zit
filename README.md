@@ -30,6 +30,13 @@ do nothing.
 By the way, the default value of `ZIT_MODULES_PATH` is defined as the value of
 your `ZDOTDIR` variable or your home directory.
 
+You can remove an installed module using `remove`:
+
+    $ zit-remove ".zim"
+
+This will prompt if you really want to remove the directory `ZIT_MODULES_PATH/.zim`.
+If you answer (y)es, the removal will continue.
+
 After install, you can load ZIM by running:
 
     $ zit-load ".zim" "init.zsh"
@@ -46,7 +53,9 @@ the repository url during `zit-install` call:
 
 **Important note:** Zit does not support changing branches after install. If
 you want to change a branch of an already installed branch, go to the directory
-of the installed plugin and call `git checkout branch-name` manually!
+of the installed plugin and call `git checkout branch-name` manually! An alternative
+is to use `zit-remove` to remove the module without removing it from your configuration,
+so the module will be reinstalled in the next ZSH startup.
 
 You can also call both `zit-install` and `zit-load` in one step:
 
@@ -72,6 +81,7 @@ Zit also provide some command alias so you can type slightly less:
 | `zit-load`         | `zit-lo` |
 | `zit-install-load` | `zit-il` |
 | `zit-update`       | `zit-up` |
+| `zit-remove`       | `zit-rm` |
 
 ## Installation
 
@@ -166,7 +176,7 @@ Both `zit-install` and `zit-install-load` supports passing the a last parameter
 to enable/disable upgrade. Pass `1` to enable (default) and pass `0` to disable
 upgrade in a specific module. For example:
 
-    zit-install "https://github.com/Eriner/zim/" ".zim" 0 
+    zit-install "https://github.com/Eriner/zim/" ".zim" 0
     zit-install-load "https://github.com/Eriner/zim/" ".zim" "init.zsh" 0
 
 So lets say you want to use `Eriner/zim` with commit `abcde`, you can declare
@@ -174,3 +184,9 @@ in your `~/.zshrc` the last command above and run:
 
     $ cd ~/.zim
     $ git checkout abcde
+
+### How can I remove a module? It keeps being reinstalled after calling `zit-rm`!
+
+Using `zit-remove` will delete the directory, however if you do not remove it from
+your `.zshrc` it will be installed again in the next ZSH startup. So do not forget
+to remove the call to `zit-install` or `zit-install-load` of your module.
