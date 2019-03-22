@@ -1,17 +1,18 @@
 language: sh
 sudo: false
-dist: trusty
+dist: xenial
 env:
-  - USING_ZSH_VERSION="zsh-5.0.8"
-  - USING_ZSH_VERSION="zsh-5.1.1"
-  - USING_ZSH_VERSION="zsh-5.2"
-  - USING_ZSH_VERSION="zsh-5.3.1"
-  - USING_ZSH_VERSION="zsh-5.4.2"
-  - USING_ZSH_VERSION="zsh-5.5.1"
+  - ZSH_FILE="zsh-5.2.tar.gz"
+  - ZSH_FILE="zsh-5.3.1.tar.gz"
+  - ZSH_FILE="zsh-5.4.2.tar.gz"
+  - ZSH_FILE="zsh-5.5.1.tar.gz"
+  - ZSH_FILE="zsh-5.6.2.tar.xz"
+  - ZSH_FILE="zsh-5.7.1.tar.xz"
 before_install:
+  - sudo apt-get install -y bsdtar
   - cd "${HOME}"
-  - curl -L "https://downloads.sourceforge.net/zsh/${USING_ZSH_VERSION}.tar.gz" | tar zx
-  - cd "${USING_ZSH_VERSION}"
+  - curl -L "https://downloads.sourceforge.net/zsh/${ZSH_FILE}" | bsdtar xf -
+  - cd "${ZSH_FILE%.*.*}"
   - ./configure --prefix="${HOME}/zsh"
   - make -j2
   - make install

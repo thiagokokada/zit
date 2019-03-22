@@ -106,15 +106,18 @@ So Zit can manage Zit updates too.
 
 ## Supported versions
 
-Zit supports ZSH version `5.0.0` and above. There are automated tests running
-in the following versions of ZSH in [Travis-CI](https://travis-ci.org/thiagokokada/zit):
+Zit supports ZSH version `5.2.0` and above. Older versions may work however
+they're unsupported.
 
-- `5.0.8`
-- `5.1.1`
+There are automated tests running in the following versions of ZSH in
+[Travis-CI](https://travis-ci.org/thiagokokada/zit):
+
 - `5.2`
 - `5.3.1`
 - `5.4.2`
 - `5.5.1`
+- `5.6.2`
+- `5.7.1`
 
 For Git, version `1.9.0` and above are supported.
 
