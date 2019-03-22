@@ -46,13 +46,13 @@ zit-install() {
   local upgrade="${3:-1}"
 
   # http://zsh.sourceforge.net/Doc/Release/Expansion.html#Parameter-Expansion
-  # https://github.com/m45t3r/zit#branch -> https://github.com/m45t3r/zit
+  # https://github.com/thiagokokada/zit#branch -> https://github.com/thiagokokada/zit
   local git_repo="${git_url%'#'*}"
 
   local git_branch="${git_url#*'#'}"
-  # https://github.com/m45t3r/zit -> master
-  # https://github.com/m45t3r/zit# -> master
-  # https://github.com/m45t3r/zit#branch -> branch
+  # https://github.com/thiagokokada/zit -> master
+  # https://github.com/thiagokokada/zit# -> master
+  # https://github.com/thiagokokada/zit#branch -> branch
   if [[ -z "${git_branch}" ]] || [[ "${git_branch}" == "${git_url}" ]]; then
     git_branch="master"
   fi

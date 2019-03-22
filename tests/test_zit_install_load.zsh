@@ -6,7 +6,7 @@ SHUNIT_PARENT=$0
 source ../zit.zsh
 
 setUp() {
-  REPO_URL="https://github.com/m45t3r/zit"
+  REPO_URL="https://github.com/thiagokokada/zit"
   # mocking real zit functions
   zit-install() { echo "zit-install" "${@}" }
   zit-load() { echo "zit-load" "${@}" }
@@ -15,7 +15,7 @@ setUp() {
 test_install_load() {
   local result="$(zit-install-load "${REPO_URL}" "zit" "zit.zsh")"
   local expect="$(cat <<EOF
-zit-install https://github.com/m45t3r/zit zit
+zit-install https://github.com/thiagokokada/zit zit
 zit-load zit zit.zsh 1
 EOF
   )"
@@ -25,7 +25,7 @@ EOF
 test_install_load_without_upgrade() {
   local result="$(zit-install-load "${REPO_URL}" "zit" "zit.zsh" 0)"
   local expect="$(cat <<EOF
-zit-install https://github.com/m45t3r/zit zit
+zit-install https://github.com/thiagokokada/zit zit
 zit-load zit zit.zsh 0
 EOF
   )"

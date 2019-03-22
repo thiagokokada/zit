@@ -2,7 +2,7 @@
 
 ## minimal plugin manager for ZSH
 
-[![Build Status](https://travis-ci.org/m45t3r/zit.svg?branch=master)](https://travis-ci.org/m45t3r/zit)
+[![Build Status](https://travis-ci.org/thiagokokada/zit.svg?branch=master)](https://travis-ci.org/thiagokokada/zit)
 
 Zit is yet another plugin manager for ZSH. It is minimal because it implements
 the bare minimum to be qualified as a plugin manager: it allows the user to
@@ -92,7 +92,7 @@ self-contained inside this one file.
 
 If you want to be fancy, you can also clone this repository:
 
-    $ git clone https://github.com/m45t3r/zit.git "${HOME}/.zit"
+    $ git clone https://github.com/thiagokokada/zit.git "${HOME}/.zit"
 
 And source the cloned diretory in your `~/.zshrc`
 
@@ -100,14 +100,14 @@ And source the cloned diretory in your `~/.zshrc`
 
 In the above case you could even put in your `~/.zshrc` (after above line):
 
-    zit-install "https://github.com/m45t3r/zit" ".zit"
+    zit-install "https://github.com/thiagokokada/zit" ".zit"
 
 So Zit can manage Zit updates too.
 
 ## Supported versions
 
 Zit supports ZSH version `5.0.0` and above. There are automated tests running
-in the following versions of ZSH in [Travis-CI](https://travis-ci.org/m45t3r/zit):
+in the following versions of ZSH in [Travis-CI](https://travis-ci.org/thiagokokada/zit):
 
 - `5.0.8`
 - `5.1.1`
@@ -121,7 +121,7 @@ For Git, version `1.9.0` and above are supported.
 ## Examples
 
 You can see examples of Zit utilization in
-[my dotfiles](https://github.com/m45t3r/dotfiles/tree/master/zsh).
+[my dotfiles](https://github.com/thiagokokada/dotfiles/tree/master/zsh).
 
 ## FAQ
 
@@ -146,7 +146,7 @@ ZSH files and plugins. You can copy it somewhere and adapt it to your needs,
 or you can call it directly by adding the following lines **at the end of your
 `~/.zshrc`**:
 
-    zit-in "https://github.com/m45t3r/zit" ".zit" # Skip if Zit is already installed
+    zit-in "https://github.com/thiagokokada/zit" ".zit" # Skip if Zit is already installed
     zit-lo ".zit" "extras/compile-zsh-files.zsh"
 
 ### How can I run a bash/ksh/sh plugin?
