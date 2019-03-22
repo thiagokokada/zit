@@ -29,5 +29,6 @@ tests:
 	zsh "./test_zit_install_load.zsh"
 	zsh "./test_zit_load.zsh"
 	zsh "./test_zit_update.zsh"
+	zsh "./test_zit_remove.zsh"
 	zsh "./test_zit_integration.zsh"
 	echo

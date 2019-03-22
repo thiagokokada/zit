@@ -80,4 +80,10 @@ test_zit_up() {
   assertTrue "${?}"
 }
 
+test_zit_rm() {
+  assertTrue "[[ -d ${ZIT_MODULES_PATH}/zim ]]"
+  yes y | zit-rm "zim"
+  assertTrue "[[ ! -d ${ZIT_MODULES_PATH}/zim ]]"
+}
+
 source ./shunit2/src/shunit2
