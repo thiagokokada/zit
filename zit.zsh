@@ -99,6 +99,7 @@ zit-update() {
 # remove module
 zit-remove() {
   _zit-param-validation 'Module directory' "${1}" || return 1
+
   local module_dir="${1}"
   local module_path="${ZIT_MODULES_PATH}/${module_dir}"
 
@@ -108,7 +109,7 @@ zit-remove() {
   fi
 
   while true; do
-    printf 'Really delete module %s? (y/n)' "${module_dir}"
+    printf 'Really delete module %s? (y/n) ' "${module_dir}"
     read -r yn
     case $yn in
       [Yy]* ) rm -rf "${ZIT_MODULES_PATH:?}/${module_dir}"

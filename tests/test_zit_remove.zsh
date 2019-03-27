@@ -18,13 +18,13 @@ tearDown() {
 
 test_remove_directory() {
     local result="$(yes y | zit-remove a)"
-    assertEquals "Really delete module a? (y/n)" "${result}"
+    assertEquals "Really delete module a? (y/n) " "${result}"
     assertTrue "[[ ! -d \"${ZIT_MODULES_PATH}/a\" ]]"
 }
 
 test_do_not_remove_directory() {
     local result="$(yes n | zit-remove b)"
-    assertEquals "Really delete module b? (y/n)" "${result}"
+    assertEquals "Really delete module b? (y/n) " "${result}"
     assertTrue "[[ -d \"${ZIT_MODULES_PATH}/b\" ]]"
 }
 
