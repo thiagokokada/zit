@@ -128,7 +128,7 @@ You can see examples of Zit utilization in
 
 ## FAQ
 
-### Why zit install everything in home directory by default?
+### Why Zit install everything in home directory by default?
 
 Because some plugins assume that they're running from home. If this isn't a
 problem for you, you can simply set your `ZIT_MODULES_PATH` to something in
@@ -173,18 +173,34 @@ instead of using `source` to load, you can do the following:
     zit-in "https://github.com/clvv/fasd" "fasd"
     export PATH="${ZIT_MODULES_PATH}/fasd:${PATH}"
 
+### How can I disable upgrades for a specific module in Zit?
+
+You can set `ZIT_DISABLE_UPGRADE` in `zit-install` and `zit-install-load` to
+disable upgrades for a specific module. For example:
+
+    ZIT_DISABLE_UPGRADE=1 zit-install "https://github.com/Eriner/zim/" ".zim"
+    ZIT_DISABLE_UPGRADE=1 zit-install-load "https://github.com/Eriner/zim/" ".zim" "init.zsh"
+
+You can also disable `ZIT_DISABLE_UPGRADE` globally by calling `export
+ZIT_DISABLE_UPGRADE=1` in your `.zshrc`. This may be useful if you want to only
+updates some specific modules, by unsetting `ZIT_DISABLE_UPGRADE`. For example:
+
+    export ZIT_DISABLE_UPGRADE=1
+    ZIT_DISABLE_UPGRADE= zit-install "https://github.com/Eriner/zim/" ".zim"
+    ZIT_DISABLE_UPGRADE= zit-install-load "https://github.com/Eriner/zim/" ".zim" "init.zsh"
+
 ### How can I force a specific version of module in Zit?
 
-Both `zit-install` and `zit-install-load` supports passing the a last parameter
-to enable/disable upgrade. Pass `1` to enable (default) and pass `0` to disable
-upgrade in a specific module. For example:
+Following the tip above to disable upgrades, you can be sure that one specific
+module will never change its version.
 
-    zit-install "https://github.com/Eriner/zim/" ".zim" 0
-    zit-install-load "https://github.com/Eriner/zim/" ".zim" "init.zsh" 0
+So lets say you want to use `Eriner/zim` with commit `abcde`, you can do
+something like this:
 
-So lets say you want to use `Eriner/zim` with commit `abcde`, you can declare
-in your `~/.zshrc` the last command above and run:
+    # In your .zshrc
+    ZIT_DISABLE_UPGRADE=1 zit-install "https://github.com/Eriner/zim/" ".zim"
 
+    # In ZSH itself
     $ cd ~/.zim
     $ git checkout abcde
 
