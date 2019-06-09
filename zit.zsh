@@ -43,7 +43,6 @@ zit-install() {
 
   local git_url="${1}"
   local module_dir="${ZIT_MODULES_PATH}/${2}"
-  local upgrade="${3:-1}"
 
   # http://zsh.sourceforge.net/Doc/Release/Expansion.html#Parameter-Expansion
   # https://github.com/thiagokokada/zit#branch -> https://github.com/thiagokokada/zit
@@ -65,7 +64,7 @@ zit-install() {
     printf '\n'
   fi
   # added to global dir array for updater
-  [[ "${upgrade}" -eq 1 ]] && ZIT_MODULES_UPGRADE+=("${module_dir}")
+  [[ -z "${ZIT_DISABLE_UPGRADE}" ]] && ZIT_MODULES_UPGRADE+=("${module_dir}")
 }
 
 # do both above in one step
@@ -77,10 +76,9 @@ zit-install-load() {
   local git_repo="${1}"
   local module_dir="${2}"
   local dot_zsh="${3}"
-  local upgrade="${4:-1}"
 
   zit-install "${git_repo}" "${module_dir}"
-  zit-load "${module_dir}" "${dot_zsh}" "${upgrade}"
+  zit-load "${module_dir}" "${dot_zsh}"
 }
 
 # updater

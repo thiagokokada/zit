@@ -56,13 +56,27 @@ EOF
 }
 
 test_install_without_upgrade() {
-  local result="$(zit-install "${REPO_URL}" "zit" 0;
+  local result="$(ZIT_DISABLE_UPGRADE=1 zit-install "${REPO_URL}" "zit";
                   echo "ZIT_MODULES_UPGRADE: ${ZIT_MODULES_UPGRADE}")"
   local expect="$(cat <<EOF
 Installing ${ZIT_MODULES_PATH}/zit
 git clone --recurse-submodules ${REPO_URL} -b master ${ZIT_MODULES_PATH}/zit
 
 ZIT_MODULES_UPGRADE: 
+EOF
+  )"
+  assertEquals "${expect}" "${result}"
+}
+
+test_install_with_upgrade_forced() {
+  local result="$(ZIT_DISABLE_UPGRADE=1
+                  ZIT_DISABLE_UPGRADE= zit-install "${REPO_URL}" "zit";
+                  echo "ZIT_MODULES_UPGRADE: ${ZIT_MODULES_UPGRADE}")"
+  local expect="$(cat <<EOF
+Installing ${ZIT_MODULES_PATH}/zit
+git clone --recurse-submodules ${REPO_URL} -b master ${ZIT_MODULES_PATH}/zit
+
+ZIT_MODULES_UPGRADE: ${ZIT_MODULES_PATH}/zit
 EOF
   )"
   assertEquals "${expect}" "${result}"

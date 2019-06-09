@@ -16,17 +16,7 @@ test_install_load() {
   local result="$(zit-install-load "${REPO_URL}" "zit" "zit.zsh")"
   local expect="$(cat <<EOF
 zit-install https://github.com/thiagokokada/zit zit
-zit-load zit zit.zsh 1
-EOF
-  )"
-  assertEquals "${expect}" "${result}"
-}
-
-test_install_load_without_upgrade() {
-  local result="$(zit-install-load "${REPO_URL}" "zit" "zit.zsh" 0)"
-  local expect="$(cat <<EOF
-zit-install https://github.com/thiagokokada/zit zit
-zit-load zit zit.zsh 0
+zit-load zit zit.zsh
 EOF
   )"
   assertEquals "${expect}" "${result}"
