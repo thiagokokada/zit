@@ -123,8 +123,7 @@ For Git, version `1.9.0` and above are supported.
 
 ## Examples
 
-You can see examples of Zit utilization in
-[my dotfiles](https://github.com/thiagokokada/dotfiles/tree/master/zsh).
+You can see examples of Zit utilization in [zshrc.example](zshrc.example)
 
 ## FAQ
 
