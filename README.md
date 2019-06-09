@@ -7,7 +7,7 @@
 Zit is yet another plugin manager for ZSH. It is minimal because it implements
 the bare minimum to be qualified as a plugin manager: it allows the user to
 install plugins from Git repositories (and Git repositories only, them why
-the name), source plugins and update them. It does not implement fancy
+the name), source plugins and upgrade them. It does not implement fancy
 functions like cleanup of removed plugins, automatic compilation of installed
 plugins, alias for oh-my-zsh/prezto/other ZSH frameworks, building binaries,
 PATH manipulation and others.
@@ -61,12 +61,12 @@ You can also call both `zit-install` and `zit-load` in one step:
 
     $ zit-install-load "https://github.com/Eriner/zim/" ".zim" "init.zsh"
 
-Finally, Zit can also update all your installed plugins. For this one you
+Finally, Zit can also upgrade all your installed plugins. For this one you
 simply need to run:
 
-    $ zit-update
+    $ zit-upgrade
 
-And Zit will update all your plugins.
+And Zit will upgrade all your plugins.
 
 Of course, instead of typing this command at the start of your session
 everytime, you can simply put in your `~/.zshrc`.
@@ -80,7 +80,7 @@ Zit also provide some command alias so you can type slightly less:
 | `zit-install`      | `zit-in` |
 | `zit-load`         | `zit-lo` |
 | `zit-install-load` | `zit-il` |
-| `zit-update`       | `zit-up` |
+| `zit-upgrade`      | `zit-up` |
 | `zit-remove`       | `zit-rm` |
 
 ## Installation
@@ -102,7 +102,7 @@ In the above case you could even put in your `~/.zshrc` (after above line):
 
     zit-install "https://github.com/thiagokokada/zit" ".zit"
 
-So Zit can manage Zit updates too.
+So Zit can manage Zit upgrades too.
 
 ## Supported versions
 
@@ -183,7 +183,7 @@ disable upgrades for a specific module. For example:
 
 You can also disable `ZIT_DISABLE_UPGRADE` globally by calling `export
 ZIT_DISABLE_UPGRADE=1` in your `.zshrc`. This may be useful if you want to only
-updates some specific modules, by unsetting `ZIT_DISABLE_UPGRADE`. For example:
+upgrade some specific modules, by unsetting `ZIT_DISABLE_UPGRADE`. For example:
 
     export ZIT_DISABLE_UPGRADE=1
     ZIT_DISABLE_UPGRADE= zit-install "https://github.com/Eriner/zim/" ".zim"

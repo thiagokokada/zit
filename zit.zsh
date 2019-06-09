@@ -81,8 +81,8 @@ zit-install-load() {
   zit-load "${module_dir}" "${dot_zsh}"
 }
 
-# updater
-zit-update() {
+# upgrade modules
+zit-upgrade() {
   local module_dir
 
   for module_dir in "${ZIT_MODULES_UPGRADE[@]}"; do
@@ -93,6 +93,7 @@ zit-update() {
     popd > /dev/null || continue
   done
 }
+alias zit-update='zit-upgrade' # deprecated
 
 # remove module
 zit-remove() {
@@ -121,7 +122,7 @@ zit-remove() {
 alias zit-in='zit-install'
 alias zit-lo='zit-load'
 alias zit-il='zit-install-load'
-alias zit-up='zit-update'
+alias zit-up='zit-upgrade'
 alias zit-rm='zit-remove'
 
 # vim: ft=zsh

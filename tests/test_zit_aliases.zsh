@@ -10,7 +10,7 @@ setUp() {
   zit-install() { echo "zit-install" }
   zit-load() { echo "zit-load" }
   zit-install-load() { echo "zit-install-load" }
-  zit-update() { echo "zit-update" }
+  zit-upgrade() { echo "zit-upgrade" }
   zit-remove() {echo "zit-remove"}
 }
 
@@ -31,7 +31,12 @@ test_alias_zit_il() {
 
 test_alias_zit_up() {
   local result="$(zit-up)"
-  assertEquals "zit-update" "${result}"
+  assertEquals "zit-upgrade" "${result}"
+}
+
+test_alias_zit_update() {
+  local result="$(zit-update)"
+  assertEquals "zit-upgrade" "${result}"
 }
 
 test_alias_zit_rm() {

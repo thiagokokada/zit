@@ -17,14 +17,14 @@ tearDown() {
   rm -rf "${ZIT_MODULES_PATH}"
 }
 
-test_update_without_repos() {
-  local result="$(zit-update)"
+test_upgrade_without_repos() {
+  local result="$(zit-upgrade)"
   assertNull "${result}"
 }
 
-test_update_with_repos() {
+test_upgrade_with_repos() {
   ZIT_MODULES_UPGRADE=("${ZIT_MODULES_PATH}/a" "${ZIT_MODULES_PATH}/b")
-  local result="$(zit-update)"
+  local result="$(zit-upgrade)"
   local expect="$(cat << EOF
 Updating ${ZIT_MODULES_PATH}/a
 git pull
