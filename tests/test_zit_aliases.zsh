@@ -4,14 +4,15 @@ setopt shwordsplit
 SHUNIT_PARENT=$0
 
 source ../zit.zsh
+source ./test_helpers.zsh
 
 setUp() {
   # mocking real zit functions
-  zit-install() { echo "zit-install" }
-  zit-load() { echo "zit-load" }
-  zit-install-load() { echo "zit-install-load" }
-  zit-upgrade() { echo "zit-upgrade" }
-  zit-remove() {echo "zit-remove"}
+  mock zit-install
+  mock zit-load
+  mock zit-install-load
+  mock zit-upgrade
+  mock zit-remove
 }
 
 test_alias_zit_in() {

@@ -4,12 +4,12 @@ setopt shwordsplit
 SHUNIT_PARENT=$0
 
 source ../zit.zsh
+source ./test_helpers.zsh
 
 setUp() {
   REPO_URL="https://github.com/thiagokokada/zit"
   ZIT_MODULES_PATH=$(mktemp -d)
-  # mock git
-  export PATH="${PWD}/mocks/bin:${PATH}"
+  mock git
 }
 
 tearDown() {

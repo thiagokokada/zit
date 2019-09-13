@@ -4,13 +4,13 @@ setopt shwordsplit
 SHUNIT_PARENT=$0
 
 source ../zit.zsh
+source ./test_helpers.zsh
 
 setUp() {
   ZIT_MODULES_PATH=$(mktemp -d)
-  # mock git
-  export PATH="${PWD}/mocks/bin:${PATH}"
   mkdir -p "${ZIT_MODULES_PATH}/a"
   mkdir -p "${ZIT_MODULES_PATH}/b"
+  mock git
 }
 
 tearDown() {
