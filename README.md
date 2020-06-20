@@ -2,6 +2,8 @@
 
 ## minimal plugin manager for ZSH
 
+**This software is completed, not abandoned. More details in [FAQ](#FAQ).**
+
 [![Build Status](https://travis-ci.org/thiagokokada/zit.svg?branch=master)](https://travis-ci.org/thiagokokada/zit)
 
 Zit is yet another plugin manager for ZSH. It is minimal because it implements
@@ -126,6 +128,24 @@ For Git, version `1.9.0` and above are supported.
 You can see examples of Zit utilization in [zshrc.example](zshrc.example)
 
 ## FAQ
+
+### Why Zit doesn't have updates? Looks like an abandoned software...
+
+Zit is feature complete. It were developed with two objectives in mind:
+
+1. Being as minimal as possible, but not minimal enough that would be useless
+2. Being as correct as possible, doing what I want without trying to be smart
+
+Both objectives have been archived so I can proudly say that Zit is a finished
+software. I still use Zit daily, and it covers all my use cases and,
+surprisingly, it is flexible enought that I still find new ways to use it.
+
+And more important, the last bug I found in it was months ago (and it was a
+simple typo!).
+
+The lack of updates doesn't mean that Zit is abandoned, though. Like I said
+above, I still use Zit daily, so if I (or someone) found some bug I will fix
+it.
 
 ### Why Zit install everything in home directory by default?
 
