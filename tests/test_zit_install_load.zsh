@@ -4,12 +4,13 @@ setopt shwordsplit
 SHUNIT_PARENT=$0
 
 source ../zit.zsh
+source ./test_helpers.zsh
 
 setUp() {
   REPO_URL="https://github.com/thiagokokada/zit"
   # mocking real zit functions
-  zit-install() { echo "zit-install" "${@}" }
-  zit-load() { echo "zit-load" "${@}" }
+  mock zit-install
+  mock zit-load
 }
 
 test_install_load() {
