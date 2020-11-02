@@ -4,7 +4,7 @@
 
 **This software is completed, not abandoned. More details in [FAQ](#FAQ).**
 
-[![Build Status](https://travis-ci.org/thiagokokada/zit.svg?branch=master)](https://travis-ci.org/thiagokokada/zit)
+[![Test](https://github.com/thiagokokada/zit/workflows/Test/badge.svg)](https://github.com/thiagokokada/zit/actions)
 
 Zit is yet another plugin manager for ZSH. It is minimal because it implements
 the bare minimum to be qualified as a plugin manager: it allows the user to
@@ -110,16 +110,6 @@ So Zit can manage Zit upgrades too.
 
 Zit supports ZSH version `5.2.0` and above. Older versions may work however
 they're unsupported.
-
-There are automated tests running in the following versions of ZSH in
-[Travis-CI](https://travis-ci.org/thiagokokada/zit):
-
-- `5.2`
-- `5.3.1`
-- `5.4.2`
-- `5.5.1`
-- `5.6.2`
-- `5.7.1`
 
 For Git, version `1.9.0` and above are supported.
 
